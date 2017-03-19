@@ -1,7 +1,7 @@
 '''
  LibreConnect : Scan USB Serial port and connected them
  using connector
- Author : Rémi Sarrailh (madnerd.org)
+ Author : Remi Sarrailh (madnerd.org)
  Email : remi@madnerd.org
  License : MIT
 '''
@@ -10,38 +10,58 @@
 import serial
 from serial.tools import list_ports
 import time
+import sys
 from threading import Thread
 import subprocess
 import os
 
-devices = []
-connected_devices = []
 baudrate = 115200
-connectors = []
+scan_speed = 1
+retry_connection = 3
 
-devices_ports = {
-    "test": 42000,
-    "leds": 42001,
-    "radio433": 42002,
-    "openlight": 42003,
-    "buzzer": 42004,
-    "temphum": 42005
-}
+devices_ports = []
+devices_name = []
+devices_websocket = []
+
+if sys.platform == "win32":
+    connector_software = "connector.exe"
+else:
+    connector_software = "./connector"
+
+arguments = " ".join(sys.argv[1:])
 
 
 # Connected to arduino send /info and show response
-def getName(port):
+def getInfo(usb_port):
+    retry = retry_connection
     try:
-        arduino = serial.Serial(port, baudrate, timeout=2)
+        arduino = serial.Serial(usb_port, baudrate,
+                                writeTimeout=1, timeout=1)
         time.sleep(2)
-        arduino.write("/info".encode())
-        arduino.flushInput()
-        device_info = arduino.readline().strip()
-        device_info = device_info.decode()
-        arduino.close()
-        return device_info
+        while retry > 0:
+            # Ask for information
+            arduino.write("/info".encode())
+            arduino.flushInput()
+
+            # Get answer
+            device_info = arduino.readline().strip()
+            device_info = device_info.decode()
+
+            # print(device_info)
+            if ":" in device_info:
+                device_array = device_info.split(":")
+                name = device_array[0]
+                port = device_array[1]
+            else:
+                name = ""
+                port = ""
+                arduino.close()
+            retry = retry - 1
+
+        return name, port
     except Exception as e:
-        return ""
+        print("[ERROR]: " + str(e))
+        return "", ""
 
 
 # Get current serials port and put name in an array
@@ -54,41 +74,52 @@ def getPorts():
 
 
 # Start connector
-def connector_thread(port, websocket_port):
-    command = "connector.exe"
-    print(command+' --serial '+str(port)+' --port '+str(websocket_port))
-    os.system(command+' --serial '+str(port)+' --port "'+str(websocket_port))
-    print("Print stop")
+def connector_thread(usb_port, websocket_port):
+    command = connector_software + ' --serial ' + str(usb_port)
+    command = command + ' --port '+str(websocket_port)
+    command = command + " " + arguments
+    print("[INFO]:" + command)
+    os.system(command)
 
 
 # Start seperate thread for connector
-def connect(port, websocket_port):
+def connect(usb_port, websocket_port):
     new_connector = Thread(target=connector_thread,
-                           args=(port, websocket_port))
+                           args=(usb_port, websocket_port))
     new_connector.daemon = True
     new_connector.start()
     # connectors.append(new_connector)
 
 
+# Search for arduino
 def scan_devices():
     scanned_devices = getPorts()
-    for port in scanned_devices:
-        if port not in devices:
-            print("ADDED:" + port)
-            devices.append(port)
-            name = getName(port)
-            if name != "":
-                print("CONNECTED: " + name)
-                connect(port, devices_ports[name])
+    for usb_port in scanned_devices:
+        if usb_port not in devices_ports:
+            print("[NEW]: " + usb_port)
+            devices_ports.append(usb_port)
+            name, ws_port = getInfo(usb_port)
+            if name != "" and ws_port != "":
+                print("[INFO]: " + name + " connected")
+                connect(usb_port, ws_port)
+                devices_name.append(name)
+                devices_websocket.append(ws_port)
             else:
-                print("NOT CONNECTED: " + port)
-    for device in devices:
-        if device not in scanned_devices:
-            print("REMOVED:" + device)
-            devices.remove(device)
+                print("[WARNING]:" + usb_port + " not connected")
+    for device_port in devices_ports:
+
+        if device_port not in scanned_devices:
+            print("[INFO]: " + device_port + " was removed")
+            devices_ports.remove(device_port)
 
 while True:
     scan_devices()
-    print(devices)
-    # print(connectors)
-    time.sleep(2)
+    """
+    print("Devices")
+    print(devices_name)
+    print("Ports")
+    print(devices_ports)
+    print("Websockets")
+    print(devices_websocket)
+    """
+    time.sleep(scan_speed)
