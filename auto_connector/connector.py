@@ -135,7 +135,6 @@ def write(message):
     elif message == "@reboot":
         if power_management:
             print("Reboot")
-            websocket_off()
             if platform.system() == "Windows":
                 call(["scripts\\reboot.bat"])
             else:
@@ -144,7 +143,6 @@ def write(message):
     elif message == "@poweroff":
         if power_management:
             print("Power off")
-            websocket_off()
             if platform.system() == "Windows":
                 call(["scripts\\poweroff.bat"])
             else:
