@@ -52,12 +52,12 @@ def getInfo(usb_port):
                 device_array = device_info.split(":")
                 name = device_array[0]
                 port = device_array[1]
-		retry = 0
+                retry = 0
             else:
                 name = ""
                 port = ""
             retry = retry - 1
-	arduino.close()
+        arduino.close()
         return name, port
     except Exception as e:
         print("[ERROR]: " + str(e))
