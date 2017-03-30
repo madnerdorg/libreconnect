@@ -20,26 +20,26 @@ I compiled it using pyinstaller so it can works without any installation, just c
 # Usage
 All arguments send to usb_scanner will be transfer to connector.    
 You don't need to use any argument for it to works, just start usb_scanner.    
+```
+usage: connector.py [-h] [--serial SERIAL] [--port PORT] [--secure] [--power]     
+                    [--password PASSWORD] [--local] [--bantime BANTIME]    
+                    [--retry RETRY] [--baudrate BAUDRATE] [--keys KEYS]     
 
-usage: connector.py [-h] [--serial SERIAL] [--port PORT] [--secure] [--power]
-                    [--password PASSWORD] [--local] [--bantime BANTIME]
-                    [--retry RETRY] [--baudrate BAUDRATE] [--keys KEYS]
+Transform a serial port into a websocket    
 
-Transform a serial port into a websocket
-
-optional arguments:
-  -h, --help           show this help message and exit
-  --serial SERIAL      Serial port
-  --port PORT          Websocket port
-  --secure             Add SSL
-  --power              Add power management (@reboot/@poweroff)
-  --password PASSWORD  Password for the websocket
-  --local              Websocket will only be available locally
-  --bantime BANTIME    Seconds before a ban user is unbanned
-  --retry RETRY        Number of retry before ban
-  --baudrate BAUDRATE  Baudrate for serial com
-  --keys KEYS          folders where SSL certificates are
-
+optional arguments:    
+  -h, --help           show this help message and exit   
+  --serial SERIAL      Serial port   
+  --port PORT          Websocket port   
+  --secure             Add SSL   
+  --power              Add power management (@reboot/@poweroff)   
+  --password PASSWORD  Password for the websocket   
+  --local              Websocket will only be available locally   
+  --bantime BANTIME    Seconds before a ban user is unbanned   
+  --retry RETRY        Number of retry before ban  
+  --baudrate BAUDRATE  Baudrate for serial com   
+  --keys KEYS          folders where SSL certificates are   
+```
 # Downloads
 The easiest way to use this software is to download the compiled version.    
 You can find it here:    
