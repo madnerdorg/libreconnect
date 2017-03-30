@@ -1,12 +1,11 @@
 '''
- LibreConnect : Scan USB Serial port and connected them
+ LibreConnect usb_scanner : Scan USB Serial port and connected them
  using connector
  Author : Remi Sarrailh (madnerd.org)
  Email : remi@madnerd.org
  License : MIT
 '''
 
-# Arguments/ Time
 import serial
 from serial.tools import list_ports
 import time
@@ -15,23 +14,30 @@ from threading import Thread
 import subprocess
 import os
 
+# We use 115200 as default baudrate
 baudrate = 115200
+# Check serial ports every x seconds
 scan_speed = 1
+# If we failed to have an answer retry x times
 retry_connection = 3
 
 devices_ports = []
 devices_name = []
 devices_websocket = []
 
-if sys.platform == "win32":
-    connector_software = "connector.exe"
+# Check if python file existed, if not default to compiled version
+if os.path.exists("connector.py"):
+    connector_software = "python connector.py"
 else:
-    connector_software = "./connector"
+    if sys.platform == "win32":
+        connector_software = "connector.exe"
+    else:
+        connector_software = "./connector"
 
 arguments = " ".join(sys.argv[1:])
 
 
-# Connected to arduino send /info and show response
+# Connected to arduino send /info and get answer
 def getInfo(usb_port):
     retry = retry_connection
     try:
@@ -47,13 +53,13 @@ def getInfo(usb_port):
             device_info = arduino.readline().strip()
             device_info = device_info.decode()
 
-            # print(device_info)
             if ":" in device_info:
                 device_array = device_info.split(":")
                 name = device_array[0]
                 port = device_array[1]
                 retry = 0
             else:
+                print("[WARNING]: Retry")
                 name = ""
                 port = ""
             retry = retry - 1
@@ -78,7 +84,7 @@ def connector_thread(usb_port, websocket_port):
     command = connector_software + ' --serial ' + str(usb_port)
     command = command + ' --port '+str(websocket_port)
     command = command + " " + arguments
-    print("[INFO]:" + command)
+    print("[INFO]: " + command)
     os.system(command)
 
 
@@ -105,7 +111,7 @@ def scan_devices():
                 devices_name.append(name)
                 devices_websocket.append(ws_port)
             else:
-                print("[WARNING]:" + usb_port + " not connected")
+                print("[WARNING]: " + usb_port + " not connected")
     for device_port in devices_ports:
 
         if device_port not in scanned_devices:
