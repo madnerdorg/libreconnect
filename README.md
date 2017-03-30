@@ -3,9 +3,11 @@ LibreConnect : Transform a serial port into a websocket
 * Author : Rémi Sarrailh (madnerd.org)
 * Email : remi@madnerd.org
 * License : MIT
-
+[Download](https://github.com/madnerdorg/libreconnect/releases)
 ![libreconnect](https://github.com/madnerdorg/libreconnect/blob/master/doc/libreconnect.jpg?raw=true)
 ![libreconnect_devices](https://github.com/madnerdorg/libreconnect/blob/master/doc/libreconnect_devices.jpg?raw=true)
+
+
 
 # Presentation
 LibreConnect scans serial ports and if it find a device that's answers to "/info" with     "devicename:websocketport" forward all serial messages thought a websocket server.      
@@ -40,11 +42,6 @@ optional arguments:
   --baudrate BAUDRATE  Baudrate for serial com   
   --keys KEYS          folders where SSL certificates are   
 ```
-# Downloads
-The easiest way to use this software is to download the compiled version.    
-You can find it here:    
-https://github.com/madnerdorg/libreconnect/releases
-
 # Use password
 You can use a password, just send it using the websocket.    
 For example:    
