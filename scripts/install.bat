@@ -1,6 +1,7 @@
 @echo off
 cd ..
-pip install websocket
 pip install pyserial
-pip install websocket_server
+pip install twisted
+pip install autobahn
+pip install service_identity
 pause

@@ -14,6 +14,8 @@ from threading import Thread
 import subprocess
 import os
 
+
+version = "97f9aff"
 # We use 115200 as default baudrate
 baudrate = 115200
 # Check serial ports every x seconds
@@ -24,6 +26,10 @@ retry_connection = 3
 devices_ports = []
 devices_name = []
 devices_websocket = []
+
+print("LibreConnect - version " + version)
+print("By madnerd.org (https://github.com/madnerdorg/libreconnect)")
+print("----------------------------------------------------------")
 
 # Check if python file existed, if not default to compiled version
 if os.path.exists("connector.py"):

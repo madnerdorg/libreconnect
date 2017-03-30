@@ -203,10 +203,8 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
                                     self.sendMessage(str("@banned").encode())
                                 else:
                                     suspected_clients[suspect]["retry"] = user["retry"] + 1
-                                    self.sendMessage("@wrongpassword:" +
-                                                     str(suspected_clients[suspect]["retry"]) +
-                                                     "/" +
-                                                     str(maxretry)).encode()
+                                    error_message = "@wrongpassword:" + str(suspected_clients[suspect]["retry"]) + "/" + str(maxretry)
+                                    self.sendMessage(error_message.encode())
                                     print("Recorded suspect: " +
                                           str(suspected_clients[suspect]["retry"]))
                             else:

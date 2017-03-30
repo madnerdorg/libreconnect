@@ -42,6 +42,32 @@ The easiest way to use this software is to download the compiled version.
 You can find it here:    
 https://github.com/madnerdorg/libreconnect/releases
 
+# Use password
+You can use a password, just send it using the websocket.    
+For example:    
+```
+usb_scanner --password HorseBatteryStaple
+```
+As for now you can only use the same password for each connector.    
+
+# IP Ban
+I also implement ip ban to disallow force brute.
+```
+usb_scanner --bantime seconds
+```
+
+# Power management
+If you want to be able to turn on/off your system (this is useful if you don't have access to a terminal for ex.)    
+You can use special commands.
+```
+usb_scanner --power
+```
+Then send using the websocket:
+```
+Turn off server: @poweroff
+Reboot server: @reboot
+```
+
 # Use python version
 I recommended using miniconda if you are on windows (https://conda.io/miniconda.html)  
 This will work on python 2/3.
@@ -71,30 +97,11 @@ openssl x509 -req -days 3650 -in keys/server.csr -signkey keys/server.key -out k
 openssl x509 -in keys/server.crt -out keys/server.pem    
 ```
 
-# Use password
-You can use a password, just send it using the websocket.    
-For example:    
+# Compile
+I used pyinstaller to compile, it seems it doesn't works with python 3.6
 ```
-usb_scanner --password HorseBatteryStaple
-```
-As for now you can only use the same password for each connector.    
-
-# IP Ban
-I also implement ip ban to disallow force brute.
-```
-usb_scanner --bantime seconds
-```
-
-# Power management
-If you want to be able to turn on/off your system (this is useful if you don't have access to a terminal for ex.)    
-You can use special commands.
-```
-usb_scanner --power
-```
-Then send using the websocket:
-```
-Turn off server: @poweroff
-Reboot server: @reboot
+pip install pyinstaller
+pip install pypiwin32
 ```
 
 # Source    
