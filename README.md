@@ -2,8 +2,8 @@ LibreConnect : Transform a serial port into a websocket
 --------------------------------------------------------------
 * Author : Rémi Sarrailh (madnerd.org)
 * Email : remi@madnerd.org
-* License : MIT
-[Download](https://github.com/madnerdorg/libreconnect/releases)
+* License : MIT   
+[Download](https://github.com/madnerdorg/libreconnect/releases)     
 ![libreconnect](https://github.com/madnerdorg/libreconnect/blob/master/doc/libreconnect.jpg?raw=true)
 ![libreconnect_devices](https://github.com/madnerdorg/libreconnect/blob/master/doc/libreconnect_devices.jpg?raw=true)
 
