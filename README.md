@@ -101,7 +101,9 @@ openssl x509 -in keys/server.crt -out keys/server.pem
 ```
 
 # Compile
-I used pyinstaller to compile, it seems it doesn't works with python 3.6
+I used pyinstaller to compile, it seems it doesn't works with python 3.6    
+Untested solution : http://stackoverflow.com/questions/41559171/pyinstaller-and-python3-6-tuple-index
+
 ```
 pip install pyinstaller
 pip install pypiwin32
