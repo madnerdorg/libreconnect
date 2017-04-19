@@ -104,6 +104,8 @@ Untested solution : http://stackoverflow.com/questions/41559171/pyinstaller-and-
 ```
 pip install pyinstaller
 pip install pypiwin32
+pyinstaller --onefile connector.py
+pyinstaller --onefile usb_scanner.py
 ```
 
 # Source    
