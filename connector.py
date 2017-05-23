@@ -13,6 +13,7 @@ from subprocess import call
 import platform
 import os
 import serial
+import json
 
 # Autobahn/Twisted websocket
 from twisted.internet import reactor, ssl, protocol
@@ -46,20 +47,35 @@ parser.add_argument("--keys", default="keys/",
 args = vars(parser.parse_args())
 
 # Settings
+port = args["port"]
+local = args["local"]
+
+# Serial
+device_baudrate = args["baudrate"]
+device_serial = args["serial"]
+
+# Password
 password = args["password"]
+
+# SSL
+secure = args["secure"]
+ssl_dir = args["keys"]
 bantime = float(args["bantime"])
 maxretry = args["retry"]
-local = args["local"]
-secure = args["secure"]
-port = args["port"]
-ssl_dir = args["keys"]
 
+# Power
 power_management = args["power"]
 
-# Baudrate
-device_baudrate = args["baudrate"]
-# Serial
-device_serial = args["serial"]
+# Settings
+user_settings_file = port+".json"
+user_settings = ""
+
+if os.path.isfile(user_settings_file):
+    with open(user_settings_file) as json_data_file:
+        try:
+            user_settings = json.load(json_data_file)
+        except:
+            print("user_settings doesn't works")
 
 # Clients managements
 global clients
@@ -97,7 +113,8 @@ def websocket_off():
     os._exit(1)
 
 
-def write(message):
+def write(message, client):
+    global user_settings, user_settings_file
     if message == "@reboot":
         if power_management:
             print("Reboot")
@@ -113,6 +130,21 @@ def write(message):
                 call(["scripts\\poweroff.bat"])
             else:
                 call(["poweroff"])
+
+    elif message.startswith('@save:', 0, 6):
+        # Save user settings
+        print("Save settings")
+        print(message[6:])
+        user_settings = message[6:]
+        with open(user_settings_file, 'w') as outfile:
+            json.dump(message[6:], outfile)
+
+    elif message == "@load":
+        # Load user settings
+        print("Load Settings")
+        print("@" + json.dumps(user_settings))
+        settings = "@" + json.dumps(user_settings)
+        client.sendMessage(settings.encode())
 
     else:
         # Send to arduino
@@ -171,7 +203,7 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
             if password is not False:
                 # Check if client is registered
                 if self in clients:
-                    write(message)
+                    write(message, self)
                 else:
                     ip, port = self.transport.client
                     if len(suspected_clients) > 0:
@@ -216,7 +248,7 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
                                 suspected_clients.append(suspected)
                                 print('Recorded suspect: {0}'.format(ip))
             else:
-                write(message)
+                write(message, self)
 
     # On close, we remove user from approved list
     def onClose(self, wasClean, code, reason):

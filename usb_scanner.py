@@ -15,7 +15,7 @@ import subprocess
 import os
 
 
-version = "97f9aff"
+version = "a78ae5d"
 # We use 115200 as default baudrate
 baudrate = 115200
 # Check serial ports every x seconds

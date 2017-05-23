@@ -4,13 +4,13 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "LibreConnect"
-#define MyAppVersion "97f9aff"
+#define MyAppVersion "a78ae5d"
 #define MyAppPublisher "madnerd.org"
 #define MyAppURL "http://github.com/madnerdorg/libreconnect"
 #define MyAppExeName "usb_scanner.exe"
 
 ;CHANGE PATHS before compiling!
-#define APP "E:\user\Downloads\libreconnect"
+#define APP "E:\user\Google Drive\MADNERD\github\libreconnect\dist"
 #define DRIVERS "c:\nano"
 
 [Setup]
