@@ -4,3 +4,4 @@ pip install pyinstaller
 pip install pypiwin32
 pyinstaller --onefile connector.py
 pyinstaller --onefile usb_scanner.py
+pyinstaller --onefile ws-send.py
