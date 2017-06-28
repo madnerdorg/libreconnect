@@ -4,14 +4,15 @@ import sys
 import argparse
 from websocket import create_connection
 import ssl
+import urlparse
 
-version = "97f9aff"
+VERSION = "v1.0"
 # Arguments
 parser = argparse.ArgumentParser(description="Send a message to a websocket")
 parser.add_argument("-u", "--url", required="True",
                     help="Websocket url ex: ws://127.0.0.1:42000")
 parser.add_argument("-m", "--message", required="True",
-                    help="Message ex: /ino")
+                    help="Message ex: /info")
 parser.add_argument("-p", "--password", default="")
 args = vars(parser.parse_args())
 # TODO Add password management
@@ -23,5 +24,7 @@ if args["password"] is not "":
     ws.send(args["password"])
 
 ws.send(args["message"])
-print("ws_send by madnerd.org --"+" "+version)
+print("LibreConnect ws_send - version " + VERSION)
+print("By madnerd.org (https://github.com/madnerdorg/libreconnect)")
+print("----------------------------------------------------------")
 print("--->" + args["message"])
