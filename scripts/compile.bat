@@ -1,7 +1,6 @@
 @echo off
 cd ..
-pip install pyinstaller
-pip install pypiwin32
-pyinstaller --onefile connector.py
-pyinstaller --onefile usb_scanner.py
-pyinstaller --onefile ws-send.py
+pyinstaller --onefile --icon=LibreConnect_icon.ico connector.py
+pyinstaller --onefile --icon=LibreConnect_icon.ico usb_scanner.py
+pyinstaller --onefile --icon=LibreConnect_icon.ico ws-send.py
+cd scripts
