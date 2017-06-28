@@ -6,20 +6,22 @@
 '''
 
 # Arguments/ Time
-import sys
 import time
 import argparse
 from subprocess import call
 import platform
 import os
-import serial
-
+import threading
 # Autobahn/Twisted websocket
 from twisted.internet import reactor, ssl, protocol
-from autobahn.twisted.websocket import WebSocketServerFactory
-from autobahn.twisted.websocket import WebSocketServerProtocol, listenWS
+from autobahn.twisted.websocket import WebSocketServerFactory, WebSocketServerProtocol, listenWS
+import serial
+import socket
 
-import threading
+
+# https://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
+server_ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
+
 
 # Arguments
 parser = argparse.ArgumentParser(
@@ -42,17 +44,20 @@ parser.add_argument("--baudrate", default="115200",
                     help="Baudrate for serial com")
 parser.add_argument("--keys", default="keys/",
                     help="folders where SSL certificates are")
+parser.add_argument("--name", default="unknown",
+                    help="Device name")
 
 args = vars(parser.parse_args())
 
 # Settings
 password = args["password"]
 bantime = float(args["bantime"])
-maxretry = args["retry"]
+maxretry = int(args["retry"])
 local = args["local"]
 secure = args["secure"]
 port = args["port"]
 ssl_dir = args["keys"]
+name = args["name"]
 
 power_management = args["power"]
 
@@ -72,16 +77,22 @@ suspected_clients = []
 try:
     device = serial.Serial(device_serial, device_baudrate, timeout=0.01)
 except:
-    print("[ERROR]: Serial connection failed")
+    print("["+name+"] "  + "[ERROR]: Serial connection failed")
 
 
-# Search for an element in a list and return element
+
 def search(value, list, key):
+    """
+        # Search for an element in a list and return element
+    """
     return [element for element in list if element[key] == value]
 
 
-# Search for an element and return key
+
 def search_key(value, list, key):
+    """
+        # Search for an element and return key
+    """
     for nb, element in enumerate(list):
         if element[key] == value:
             return nb
@@ -93,7 +104,7 @@ def websocket_off():
     try:
             device.close()
     except:
-            print("[WARNING]: Device not closed properly")
+            print("["+name+"] "  + "[WARN]: Device not closed properly")
     os._exit(1)
 
 
@@ -124,12 +135,12 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
     # On connect we check if the user was banned
     def onConnect(self, request):
         # print(suspected_clients)
-        print('[INFO]: New Client -- '+self.peer)
+        ip, port = self.transport.client
+        print("["+name+"] " + '[INFO]: '+ ip + ":" + args["port"] + ' connected')
 
         # Ban manager
         if password is not False:
             global suspected_clients
-            ip, port = self.transport.client
             connectiontime = time.time()
 
             # Check list of blocked client
@@ -137,19 +148,17 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
             if suspected:
                 user = suspected[0]
                 ban_remaining_time = connectiontime - user["time"]
-                print(ip+" ban for " + str(ban_remaining_time))
-
+                
                 # If user ban time is over, unban
                 if connectiontime-(user['time']) > bantime:
                     suspected_clients.remove(suspected[0])
-                    print(ip+" unbanned")
+                    print("["+name+"] "   + "[INFO]: " + ip+" is unbanned")
                 else:
                     # If password failed for maxretry block user
                     if user["retry"] >= maxretry:
-                        print(ip + " has been blocked")
+                        print("["+name+"] "  + "[INFO]: " + ip + " has been blocked ("+str(int(ban_remaining_time))+"/"+args["bantime"]+" seconds)")
 
         else:
-            print("[INFO]: No password needed")
             if self not in clients:
                 clients.append(self)
 
@@ -167,7 +176,6 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
         # print(clients)
         if not isBinary:
             message = payload.decode("utf-8")
-            print("[INFO]: <-- "+message)
             if password is not False:
                 # Check if client is registered
                 if self in clients:
@@ -184,29 +192,20 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
 
                     if blocked is False:
                         if message == password:
-                            print("Access granted")
+                            print("["+name+"] [INFO]: " + ip +":"+args["port"] + " is logged in")
                             self.sendMessage(str("@logged").encode())
                             if self not in clients:
                                 clients.append(self)
-                        else:
-                            print("Wrong Password")
-                            # self.sendMessage("Wrong Password")
-                            # self.close()
-                            print(suspected_clients)
+                        else:                            
+                            # print(suspected_clients)
                             suspect = search_key(ip, suspected_clients, 'ip')
                             if suspect is not False:
-                                print("Suspected IP")
                                 user = suspected_clients[suspect]
                                 # print(user)
-                                if user["retry"] >= maxretry:
-                                    print('Banned:{0}'.format(ip))
-                                    self.sendMessage(str("@banned").encode())
-                                else:
+                                if user["retry"] < maxretry:
                                     suspected_clients[suspect]["retry"] = user["retry"] + 1
                                     error_message = "@wrongpassword:" + str(suspected_clients[suspect]["retry"]) + "/" + str(maxretry)
                                     self.sendMessage(error_message.encode())
-                                    print("Recorded suspect: " +
-                                          str(suspected_clients[suspect]["retry"]))
                             else:
                                 mess = str("@wrongpassword:1/"+str(maxretry))
                                 self.sendMessage(mess.encode())
@@ -214,14 +213,20 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
                                              "time": time.time(),
                                              "retry": 1}
                                 suspected_clients.append(suspected)
-                                print('Recorded suspect: {0}'.format(ip))
+                            print("["+name+"] [WARN]: " + ip+":"+args["port"] + " - Wrong Password " + str(suspected_clients[suspect]["retry"]) + "/" + str(maxretry))
+                    else:
+                        print("["+name+"] [ERROR]: " + ip + ":" + args["port"] + " banned")
+                        self.sendMessage("@banned")
             else:
+                print("["+name+"] [INFO]: <-- " + message)
                 write(message)
 
     # On close, we remove user from approved list
     def onClose(self, wasClean, code, reason):
         global clients
-        print("[INFO]: Client disconnected -- {0}".format(reason))
+        ip,port = self.transport.client
+        if code != 1006:
+            print("["+name+"] [INFO]: " + ip + ":" + args["port"] + " disconnected")
         if self in clients:
             clients.remove(self)
 
@@ -235,40 +240,52 @@ def start_listen():
             data = device.readline().strip()
             if data is not b'':
                 for client in clients:
-                    print("[INFO]: --> "+str(data))
+                    print("["+name+"] [INFO]: --> "+str(data))
                     client.sendMessage(data)
         except Exception as e:
             websocket_off()
 
-# We listen to arduino message in a thread
-listener_thread = threading.Thread(target=start_listen)
-listener_thread.daemon = True
-listener_thread.start()
-print("[INFO]: Websocket started: " + port)
-
+settings_text = ""
 if secure:
-    print("[INFO]: Websocket SSL")
+    settings_text = settings_text + "SSL "
     ws_type = "wss://"
 else:
     ws_type = "ws://"
 
 if local:
-    print("[INFO]: Websocket only on local")
+    settings_text = settings_text + "LOCAL "
     interface = "localhost"
 else:
     interface = ""
+
+if password:
+    settings_text = settings_text + "PASSWORD "
 
 addr = ws_type+"0.0.0.0"+":"+port
 
 # We start the websocket here
 factory = WebSocketServerFactory(addr)
 
+failed_start = False
+
 if secure:
-    contextFactory = ssl.DefaultOpenSSLContextFactory(ssl_dir+'/server.key',
-                                                      ssl_dir+'/server.crt')
-    listenWS(factory, contextFactory, interface=interface)
+    if os.path.isfile(ssl_dir+"/privkey.pem") and os.path.isfile(ssl_dir+"/cert.pem"):
+        contextFactory = ssl.DefaultOpenSSLContextFactory(ssl_dir+'/privkey.pem',
+                                                        ssl_dir+'/cert.pem')
+        listenWS(factory, contextFactory, interface=interface)
+    else:
+        print("[ERROR]: I can't find "+ ssl_dir +"cert.pem"+" and/or "+ ssl_dir +'privkey.pem')
+        failed_start = True
 else:
     listenWS(factory, interface=interface)
 
-factory.protocol = ArduinoServerProtocol
-reactor.run()
+if not failed_start:
+    print("["+name+"] "  + "[INFO]: " + ws_type + server_ip + ":" + port + " " + settings_text)
+
+    factory.protocol = ArduinoServerProtocol
+
+    # We listen to arduino message in a thread
+    listener_thread = threading.Thread(target=start_listen)
+    listener_thread.daemon = True
+    listener_thread.start()
+    reactor.run()
