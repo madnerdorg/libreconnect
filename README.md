@@ -2,7 +2,9 @@
 
 
 [![LibreConnect Banner](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/releases) 
+
 [![Downloads](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/lc_download.png)](https://github.com/madnerdorg/libreconnect/releases)    
+
 [Download](https://github.com/madnerdorg/libreconnect/releases) / [Go to madnerd.org](https://madnerd.org) / [Videos](https://www.youtube.com/channel/UCODy2WlJf8FOgJzuKE14LkA)
 
 - [What is libreConnect](#what-is-libreconnect)
@@ -23,7 +25,7 @@
 
 # What is libreConnect
 [![Video Demo](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)     
-LibreConnect is an application to control arduino using **websockets**. 
+LibreConnect is an application to control arduino using **websockets**.     
 Plug an arduino on a computer or a Raspberry Pi, and control it using your **web browser**
 ![How it works](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_app.jpg)
 
@@ -39,11 +41,10 @@ Plug an arduino on a computer or a Raspberry Pi, and control it using your **web
 [![Video Demo](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/demo_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)
 
 
-Here are the [devices]https://github.com/madnerdorg/libreconnect/blob/master/doc/en/devices.md) i build for LibreConnect, they are cheap and easy to make. 
+Here are the [devices](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/devices.md) i build for LibreConnect, they are cheap and easy to make. 
 They are also easy to **recycle** and **upgrade**. 
 
-
-[![Devices](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/devices_av.png)]https://github.com/madnerdorg/libreconnect/blob/master/doc/en/devices.md)
+[![Devices](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/devices_av.png)](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/devices.md)
 
 
 As long as your arduino code is able **send/receive** commands using USB serial. 
