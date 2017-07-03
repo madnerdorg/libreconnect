@@ -1,6 +1,6 @@
-[![LibreConnect Banner](doc/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/)
+[![LibreConnect Banner](../img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/)
 
-![LibreConnect Banner](doc/source_python.png)    
+![LibreConnect Banner](../img/source_python.png)    
 Here is how to use the python version
 Check out **scripts/** folder for more instructions.
 
@@ -38,7 +38,7 @@ pip install pyopenssl
 ```
 python usb_scanner.py
 ```
-![LibreConnect terminal](doc/lc.png)
+![LibreConnect terminal](../img/lc.jpg)
 
 #  Compile
 Pyinstaller is a really easy to use python to executable compiler.  
