@@ -1,9 +1,9 @@
 [Français](readme_fr.md)
 
 
-[![LibreConnect Banner](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/releases) 
+[![LibreConnect Banner](doc/img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/releases) 
 
-[![Downloads](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/lc_download.png)](https://github.com/madnerdorg/libreconnect/releases)    
+[![Downloads](doc/img/lc_download.png)](https://github.com/madnerdorg/libreconnect/releases)    
 
 [Download](https://github.com/madnerdorg/libreconnect/releases) / [Go to madnerd.org](https://madnerd.org) / [Videos](https://www.youtube.com/channel/UCODy2WlJf8FOgJzuKE14LkA)
 
@@ -16,18 +16,18 @@
     - [Encryption](#encryption)
     - [Power Management](#power-management)
 - [How does libreConnect works](#how-does-libreconnect-works)
-- [Build your own applications](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/applications.md)
-- [Compile LibreConnect](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/compile.md)
-- [Use libreConnect on a Raspberry Pi](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/raspberrypi.md)
+- [Build your own applications](doc/en/applications.md)
+- [Compile LibreConnect](doc/en/compile.md)
+- [Use libreConnect on a Raspberry Pi](doc/en/raspberrypi.md)
 - [Useful links / source](#useful-links--source)
 - [License](#license)
 
 
 # What is libreConnect
-[![Video Demo](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)     
+[![Video Demo](doc/img/libreconnect_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)     
 LibreConnect is an application to control arduino using **websockets**.     
 Plug an arduino on a computer or a Raspberry Pi, and control it using your **web browser**
-![How it works](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_app.jpg)
+![How it works](doc/img/libreconnect_app.jpg)
 
 
 **No installation or settings are required**
@@ -38,23 +38,23 @@ Plug an arduino on a computer or a Raspberry Pi, and control it using your **web
 
 
 # Devices
-[![Video Demo](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/demo_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)
+[![Video Demo](doc/img/demo_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)
 
 
-Here are the [devices](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/devices.md) i build for LibreConnect, they are cheap and easy to make. 
+Here are the [devices](doc/en/devices.md) i build for LibreConnect, they are cheap and easy to make. 
 They are also easy to **recycle** and **upgrade**. 
 
-[![Devices](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/devices_av.png)](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/devices.md)
+[![Devices](doc/img/devices_av.png)](doc/en/devices.md)
 
 
 As long as your arduino code is able **send/receive** commands using USB serial. 
 You can use it with libreconnect. 
-![What is Arduino](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/whatisarduino.png) 
+![What is Arduino](doc/img/whatisarduino.png) 
 
 
 Here are some cool things you can do with libreConnect 
 * [Control lamps and power outlets](http://madnerd.org/interface/homeautomation).
-* Get notified when you received a call , using [tasker for android](https://github.com/madnerdorg/leds/apps)
+* Get notified when you received a call , using [tasker for android](https://github.com/madnerdorg/leds/)
 * Control a buzzer using any [music software](https://github.com/madnerdorg/buzzer).
 * Build and use devices in the wild! [video](https://www.youtube.com/watch?v=UThz91hRcYQ)
 * Build your own [web applications]() using your web browser
@@ -216,21 +216,21 @@ Reboot server: @reboot
 # How does libreConnect works
 LibreConnect is two compiled python scripts: 
 
-![LibreConnect Software](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/LibreConnect_software.png) 
+![LibreConnect Software](doc/img/LibreConnect_software.png) 
 * usb_scanner search for new USB serial devices plugged on your computer. 
 * It sends **/info** to each connected devices
 * If the device returns **device:port**, 
 * it starts an instance of **connector.exe** to connect a serial port to a websocket using [autobahn](http://crossbar.io/autobahn/) 
-![](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/lc_newdevice_schematics.png)
+![Shematics for new devices](doc/img/lc_newdevice_schematics.png)
 
 
-# [Build your own applications](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/applications.md)
+# [Build your own applications](doc/en/applications.md)
 
 
-# [Compile LibreConnect](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/compile.md)
+# [Compile LibreConnect](doc/en/compile.md)
 
 
-# [Use libreConnect on a Raspberry Pi](https://github.com/madnerdorg/libreconnect/blob/master/doc/en/raspberrypi.md)
+# [Use libreConnect on a Raspberry Pi](doc/en/raspberrypi.md)
 
 
 # Useful links / source 
