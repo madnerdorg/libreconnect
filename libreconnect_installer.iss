@@ -4,20 +4,20 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "LibreConnect"
-#define MyAppVersion "97f9aff"
+#define MyAppVersion "1.0"
 #define MyAppPublisher "madnerd.org"
 #define MyAppURL "http://github.com/madnerdorg/libreconnect"
 #define MyAppExeName "usb_scanner.exe"
 
 ;CHANGE PATHS before compiling!
-#define APP "E:\user\Downloads\libreconnect"
+#define APP "E:\user\Google Drive\MADNERD\github\libreconnect\dist"
 #define DRIVERS "c:\nano"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{64DDC058-59CF-4CE8-9250-FC22260FAA12}}
+AppId={{4053C9DE-794C-42AE-AD80-40C2C4CB27B8}}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
