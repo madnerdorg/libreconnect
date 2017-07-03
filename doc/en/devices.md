@@ -1,7 +1,7 @@
 [![Devices libreconnect banner](../img/libreconnect_devices_banner.png)](https://github.com/libreconnect)
 
 # [Test](#test) / [Leds](#leds) / [Radio433](#radio433) / [OpenLight](#openlight) / [TempHum](#temphum) / [Buzzer](#buzzer)
-Each devices have instructions/code/applications/schematics.
+Each device has instructions/code/applications/schematics.
 ![Repository for objects on github](../img/lc_repo.jpg)   
 
 You will need    
@@ -10,7 +10,7 @@ You will need
 * [Stripboard](https://en.wikipedia.org/wiki/Stripboard)
 * A 3D printer (for the case)    
 * Commons tools (wire cutter/electrical tape/hot glue/adhesive paste)     
-* A Multimeter (to check connectivity)
+* Multimeter (to check connectivity)
 
 # [Test](https://github.com/madnerdorg/test)
 A code to learn how to build your own devices, or try libreConnect.       
@@ -28,7 +28,7 @@ Control cheap power outlets, or send/receive messages to others arduino
 
 # [OpenLight](https://github.com/madnerdorg/openlight)
 Control milight bulb directly without the gateway.    
-You can optionally use tactile switch to use it as an switch to turn on/off a lamp.    
+You can optionally use tactile switch to use it as a switch to turn on/off a lamp.    
 [![OpenLight](../img/openlight_photo.jpg)](https://github.com/madnerdorg/openlight)
 # [TempHum](https://github.com/madnerdorg/temphum)
 Use a DHT11 sensor to measure temperature/humidity, you can also add a photoresistor.     
