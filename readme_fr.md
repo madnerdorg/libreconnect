@@ -20,7 +20,7 @@
 - [License](#license)
 
 # C'est quoi libreConnect ?
-[![Video Demo](doc/img/libreConnect_youtube.jpg)](https://www.youtube.com/watch?v=RrZaXerJBO8)  
+[![Video Demo](doc/img/libreconnect_youtube.jpg)](https://www.youtube.com/watch?v=RrZaXerJBO8)  
 LibreConnect est un logiciel qui permet de contrôler des arduinos à l'aide de **websockets**.    
 Brancher un arduino sur un ordinateur ou un Raspberry Pi et controlez le à l'aide de votre **navigateur web**
 ![How does it works](doc/img/libreconnect_app.jpg)
