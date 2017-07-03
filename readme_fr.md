@@ -1,4 +1,4 @@
-[English](http://github.com/libreconnect)
+[English](http://github.com/madnerdorg/libreconnect)
 
 [![LibreConnect Banner](doc/img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/releases)    
 [![Downloads](doc/img/lc_download.png)](https://github.com/madnerdorg/libreconnect/releases)    
