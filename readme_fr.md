@@ -4,31 +4,23 @@
 [![Downloads](doc/img/lc_download.png)](https://github.com/madnerdorg/libreconnect/releases)    
 [Télécharger](https://github.com/madnerdorg/libreconnect/releases) / [Aller sur madnerd.org](https://madnerd.org) / [Vidéos](https://www.youtube.com/channel/UCODy2WlJf8FOgJzuKE14LkA)
 
-<!-- TOC -->
-
 - [C'est quoi libreConnect ?](#cest-quoi-libreconnect-)
 - [Appareils](#appareils)
 - [Paramétrer LibreConnect](#paramétrer-libreconnect)
-    - [Paramètres](#paramètres)
     - [Ne pas connecter au réseau](#ne-pas-connecter-au-réseau)
     - [Connectez n'importe quel périphérique série.](#connectez-nimporte-quel-périphérique-série)
     - [Mot de passe](#mot-de-passe)
-        - [Bannisement / Essai](#bannisement--essai)
     - [Chiffrement](#chiffrement)
-        - [Certificate autosigné (self-signed)](#certificate-autosigné-self-signed)
-        - [Certificat Let's Encrypt](#certificat-lets-encrypt)
     - [Allumer / Eteindre à distance](#allumer--eteindre-à-distance)
 - [Comment libreConnect fonctionne](#comment-libreconnect-fonctionne)
-- [[Créer ses propres applications](doc/fr/applications.md)](#créer-ses-propres-applicationsdocfrapplicationsmd)
-- [[Compiler LibreConnect](doc/fr/compile.md)](#compiler-libreconnectdocfrcompilemd)
-- [[Utiliser libreConnect sur un Raspberry Pi](doc/fr/raspberrypi.md)](#utiliser-libreconnect-sur-un-raspberry-pidocfrraspberrypimd)
+- [Créer ses propres applications](doc/fr/applications.md)
+- [Compiler LibreConnect](doc/fr/compile.md)
+- [Utiliser libreConnect sur un Raspberry Pi](doc/fr/raspberrypi.md)]
 - [Liens utiles / source](#liens-utiles--source)
 - [License](#license)
 
-<!-- /TOC -->
-
 # C'est quoi libreConnect ?
-[![Video Demo](doc/img/libreConnect_youtube.jpg)](https://www.youtube.com/watch?v=RrZaXerJBO8)  
+[![Video Demo](doc/img/libreconnect_youtube.jpg)](https://www.youtube.com/watch?v=RrZaXerJBO8)  
 LibreConnect est un logiciel qui permet de contrôler des arduinos à l'aide de **websockets**.    
 Brancher un arduino sur un ordinateur ou un Raspberry Pi et controlez le à l'aide de votre **navigateur web**
 ![How does it works](doc/img/libreconnect_app.jpg)
