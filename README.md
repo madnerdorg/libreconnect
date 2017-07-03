@@ -2,11 +2,8 @@
 
 
 [![LibreConnect Banner](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/releases) 
-[![Downloads](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/lc_download.png)](https://github.com/madnerdorg/libreconnect/releases) 
+[![Downloads](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/lc_download.png)](https://github.com/madnerdorg/libreconnect/releases)    
 [Download](https://github.com/madnerdorg/libreconnect/releases) / [Go to madnerd.org](https://madnerd.org) / [Videos](https://www.youtube.com/channel/UCODy2WlJf8FOgJzuKE14LkA)
-
-
-<!-- TOC -->
 
 - [What is libreConnect](#what-is-libreconnect)
 - [Devices](#devices)
@@ -23,11 +20,9 @@
 - [Useful links / source](#useful-links--source)
 - [License](#license)
 
-<!-- /TOC -->
-
 
 # What is libreConnect
-[![Video Demo](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreConnect_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4) 
+[![Video Demo](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)     
 LibreConnect is an application to control arduino using **websockets**. 
 Plug an arduino on a computer or a Raspberry Pi, and control it using your **web browser**
 ![How it works](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_app.jpg)
@@ -219,6 +214,7 @@ Reboot server: @reboot
 
 # How does libreConnect works
 LibreConnect is two compiled python scripts: 
+
 ![LibreConnect Software](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/LibreConnect_software.png) 
 * usb_scanner search for new USB serial devices plugged on your computer. 
 * It sends **/info** to each connected devices
