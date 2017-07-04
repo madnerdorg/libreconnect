@@ -1,4 +1,4 @@
-[![LibreConnect Banner](../img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/)
+[![LibreConnect Banner](../img/libreconnect_banner.png)](https://madnerdorg.github.io/libreconnect/)
 
 ![LibreConnect Banner](../img/source_python.png)    
 Here is how to use the python version

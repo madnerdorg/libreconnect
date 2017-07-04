@@ -225,23 +225,19 @@ LibreConnect is two compiled python scripts:
 
 
 # Useful links / source 
-Crossbar.io - Echo_tls Autobahn example 
-https://github.com/crossbario/autobahn-python/tree/master/examples/twisted/websocket/echo_tls 
+Crossbar.io - Echo_tls Autobahn example        
+[https://github.com/crossbario/autobahn-python/tree/master/examples/twisted/websocket/echo_tls](https://github.com/crossbario/autobahn-python/tree/master/examples/twisted/websocket/echo_tls)  
 
+Simplyautomationized.blogspot.fr      
+5 ways to secure your raspberry pi's websocket server       
+[http://simplyautomationized.blogspot.fr/2015/09/5-ways-to-secure-websocket-rpi.html](http://simplyautomationized.blogspot.fr/2015/09/5-ways-to-secure-websocket-rpi.html)
 
-Simplyautomationized.blogspot.fr 
-5 ways to secure your raspberry pi's websocket server 
-http://simplyautomationized.blogspot.fr/2015/09/5-ways-to-secure-websocket-rpi.html 
-
-
-madnerd.org - Control Arduino with a portable app 
-http://www.instructables.com/id/UTest-Make-USB-Devices-With-Arduino/ 
-
+madnerd.org - Control Arduino with a portable app     
+[http://www.instructables.com/id/UTest-Make-USB-Devices-With-Arduino/](http://www.instructables.com/id/UTest-Make-USB-Devices-With-Arduino/)
 
 # License
-* LibreConnect : MIT - Rémi Sarrailh (http://madnerd.org)
-* Autobahn : MIT - Crossbar.io (http://autobahn.ws/python/)
-* Pyserial : BSD-3 - Chris Liechti (https://github.com/pyserial/pyserial)
-* Twisted : MIT - Glyph Lefkowitz (https://pypi.python.org/pypi/Twisted)
-* Icons / Images are from the noun project (Creative Commons By): [licence.txt](doc/img/licence.txt)
-
+* LibreConnect : MIT - Rémi Sarrailh [http://madnerd.org](http://madnerd.org)
+* Autobahn : MIT - Crossbar.io [http://autobahn.ws/python/](http://autobahn.ws/python/)
+* Pyserial : BSD-3 - Chris Liechti [https://github.com/pyserial/pyserial](https://github.com/pyserial/pyserial)
+* Twisted : MIT - Glyph Lefkowitz [https://pypi.python.org/pypi/Twisted](https://pypi.python.org/pypi/Twisted)
+* Icons / Images are from the [https://thenounproject.com/](https://thenounproject.com/) (Creative Commons By): [Complete licence](doc/img/licence.txt)
