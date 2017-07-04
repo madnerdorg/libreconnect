@@ -21,16 +21,16 @@ You can control the **onboard led** of the arduino using this code.
 Control 1 or more RGB LEDs.    
 You can animate each leds, and change the color using **hsv colors**.    
 You can also save the current state of the led in the eeprom of the aduino.    
-[![Leds](../img/leds_photo.jpg)](https://github.com/madnerdorg/leds)
+[![Leds](../img/leds_photo.jpg)](https://madnerdorg.github.io/leds)
 
 # [Radio433](https://madnerdorg.github.io/radio433)
 Control cheap power outlets, or send/receive messages to others arduino    
-[![Radio433](../img/radio433_photo.jpg)](https://github.com/madnerdorg/radio433)
+[![Radio433](../img/radio433_photo.jpg)](https://madnerdorg.github.io/radio433)
 
 # [OpenLight](https://madnerdorg.github.io/openlight)
 Control milight bulb directly without the gateway.    
 You can optionally use tactile switch to use it as a switch to turn on/off a lamp.    
-[![OpenLight](../img/openlight_photo.jpg)](https://github.com/madnerdorg/openlight)
+[![OpenLight](../img/openlight_photo.jpg)](https://madnerdorg.github.io/openlight)
 
 # [TempHum](https://madnerdorg.github.io/temphum)
 Use a DHT11 sensor to measure temperature/humidity, you can also add a photoresistor.     
@@ -38,5 +38,5 @@ Use a DHT11 sensor to measure temperature/humidity, you can also add a photoresi
 
 # [Buzzer](https://madnerdorg.github.io/buzzer)
 Use a buzzer as a MIDI instrument.    
-[![Buzzer](../img/buzzer_photo.jpg)](https://github.com/madnerdorg/buzzer)
+[![Buzzer](../img/buzzer_photo.jpg)](https://madnerdorg.github.io/buzzer)
 

@@ -30,7 +30,7 @@ Brancher un arduino sur un ordinateur ou un Raspberry Pi et controlez le à l'ai
 # Appareils
 [![Video Demo](doc/img/demo_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)
 
-Voici les [appareils](doc/fr/devices.md) que j'ai fabriqué pour LibreConnect, ils ne coûtent pas cher et sont facile à fabriquer.  
+Voici les [appareils](doc/fr/devices.md) que j'ai fabriqué pour LibreConnect, ils ne coûtent pas cher et sont facile à fabriquer.     
 Ils sont aussi facile à **recycler** et **améliorer**.    
 
 [![Appareils](doc/img/devices_av.png)](doc/fr/devices.md)
@@ -41,10 +41,10 @@ Vous pouvez l'utiliser avec libreconnect.
 
 Voilà quelques projets sympa , que vous pouvez faire avec libreConnect  
 * [Contrôler des lampes et des prises de courants](http://madnerd.org/interface/homeautomation).
-* Soyez prévenu quand vous recevez un appel , à l'aide de [tasker sur android](https://github.com/madnerdorg/leds/apps)
-* Contrôler un buzzer à l'aide de n'importe quel [logiciel de musique](https://github.com/madnerdorg/buzzer).
+* Soyez prévenu quand vous recevez un appel , à l'aide de [tasker sur android](https://madnerdorg.github.io/leds/readme.fr)
+* Contrôler un buzzer à l'aide de n'importe quel [logiciel de musique](https://madnerdorg.github.io/buzzer/readme.fr).
 * Construire des appareils et les utiliser en pleine nature! [video](https://www.youtube.com/edit?o=U&video_id=sHwIgMWFc-8)
-* Faire ses propres [applications web]() en utilisant uniquement son navigateur web
+* Faire ses propres [applications web](http://madnerd.org/interface/editor) en utilisant uniquement son navigateur web
 
 # Paramétrer LibreConnect
 
@@ -127,7 +127,7 @@ Pour utiliser une connexion chiffré, il nous faut un **certificat SSL**
 ###  Certificate autosigné (self-signed)
 Créer un certificat autosigné est relativement facile, toutefois, votre navigateur ne se connectera pas à un websocket chiffré avec un certificat autosigné.  
        
-Il vous faut valider le certificat, en allant sur l'ip et le port de votre websocket      https://ip:port.    
+Il vous faut valider le certificat, en allant sur l'ip et le port de votre websocket : https://ip:port.    
 Par example, https://localhost:42001
 
 Un certificat SSL est disponible dans keys/ pour tester, attention, il vous faut recréer ce certificat pour vraiment avoir une communication protégé (car la clé privée est accessible publiquement)

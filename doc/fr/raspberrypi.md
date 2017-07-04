@@ -1,13 +1,9 @@
-[![LibreConnect Banner](../img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/)
+[![LibreConnect Banner](../img/libreconnect_banner.png)](https://madnerdorg.github.io/libreconnect/readme_fr.html)
 
-<!-- TOC -->
-
-- [![Raspberry Pi](../img/rpi_exe.png) Installer LibreConnect sur un Raspberry Pi](#raspberry-piimgrpi_exepng-installer-libreconnect-sur-un-raspberry-pi)
+- [Installer LibreConnect sur un Raspberry Pi](#raspberry-piimgrpi_exepng-installer-libreconnect-sur-un-raspberry-pi)
 - [Lancer au démarrage](#lancer-au-démarrage)
 - [Rendre votre raspberry pi visible dans le réseau Windosw](#rendre-votre-raspberry-pi-visible-dans-le-réseau-windosw)
 - [Fabriquer un hub wifi](#fabriquer-un-hub-wifi)
-
-<!-- /TOC -->
 
 # ![Raspberry Pi](../img/rpi_exe.png) Installer LibreConnect sur un Raspberry Pi
 Si vous voulez installer libreConnect dans **/opt/libreConnect**    
@@ -59,7 +55,7 @@ Modifier **/etc/samba/smb.conf**
 Voici un concept pour créer un hub wifi à l'aide d'un Raspberry Pi Zero W qui tient dans une poche.
 ![Rpi Zero](../img/libreconnect_rpizero.jpg)
 
-Vous pouvez trouver les fichiers stl files (et .blend) ici: https://github.com/madnerdorg/libreconnect/tree/master/3D/spidersocket
+Vous pouvez trouver les fichiers stl files (et .blend) ici: https://github.com/madnerdorg/libreconnect/tree/master/stl/spidersocket
 
 J'ai utiliser un [Hub Anker 4-Port Ultra Slim USB3](https://www.anker.com/products/A7517011).    
 ![Soldering usb hub on a Raspberry Pi Zero](../img/lc_rpizero_solderankerusb.jpg)

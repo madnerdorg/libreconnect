@@ -1,4 +1,4 @@
-[![LibreConnect Banner](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/blob/master/readme_fr.md) 
+[![LibreConnect Banner](https://github.com/madnerdorg/libreconnect/raw/master/doc/img/libreconnect_banner.png)](https://madnerdorg.github.io/libreconnect/readme_fr.html) 
 
 Créer vos propres applications
 --------------
@@ -30,7 +30,7 @@ var ws = new WebSocket('ws://localhost:42000');
 <button onclick="ws.send('ON')">ON</button>
 <button onclick="ws.send('OFF')">OFF</button>
 ```
-Voici un autre exemple, un peu plus poussé : http://madnerd.org/interface/basic.html    
+Voici un autre exemple, un peu plus poussé : [http://madnerd.org/interface/basic.html](http://madnerd.org/interface/basic.html)
 
 # Console de développement du navigateur web
 Vous pouvez aussi utiliser la console de votre navigateur web pour tester votre websocket.

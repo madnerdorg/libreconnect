@@ -1,4 +1,4 @@
-[![LibreConnect Banner](../img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/)
+[![LibreConnect Banner](../img/libreconnect_banner.png)](https://madnerdorg.github.io/libreconnect/readme_fr.html)
 
 ![LibreConnect Python source](../img/source_python.png)    
 Voici comment utiliser directement le code en python
