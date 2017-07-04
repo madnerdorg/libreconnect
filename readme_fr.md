@@ -30,10 +30,10 @@ Brancher un arduino sur un ordinateur ou un Raspberry Pi et controlez le à l'ai
 # Appareils
 [![Video Demo](doc/img/demo_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)
 
-Voici les [appareils](doc/fr/devices.md) que j'ai fabriqué pour LibreConnect, ils ne coûtent pas cher et sont facile à fabriquer.     
+Voici les [appareils](https://madnerdorg.github.io/libreconnect/doc/fr/devices.html) que j'ai fabriqué pour LibreConnect, ils ne coûtent pas cher et sont facile à fabriquer.     
 Ils sont aussi facile à **recycler** et **améliorer**.    
 
-[![Appareils](doc/img/devices_av.png)](doc/fr/devices.md)
+[![Appareils](doc/img/devices_av.png)](https://madnerdorg.github.io/libreconnect/doc/fr/devices.html)
 
 Du moment que votre code Arduino est capable **d'envoyer/recevoir** des commandes à l'aide de l'USB.    
 Vous pouvez l'utiliser avec libreconnect.    
@@ -49,7 +49,7 @@ Voilà quelques projets sympa , que vous pouvez faire avec libreConnect
 # Paramétrer LibreConnect
 
 ## Paramètres
-Bien qu'l ne soit pas nécessaire de paramétrer libreConnect, vous pouvez utiliser des paramètres pour
+Bien qu'il ne soit pas nécessaire de paramétrer libreConnect, vous pouvez utiliser des paramètres pour
 * Utiliser votre ordinateur uniquement depuis votre ordinateur
 * Chiffrer / Protégé à l'aide d'un mot de passe votre websocket
 * Connectez n'importe quel arduino (ou périphériques série)
@@ -124,7 +124,7 @@ usb_scanner --password HorseBatteryStaple --bantime 60 --retry 5
 Par défaut, les websockets ne sont pas chiffré.
 Pour utiliser une connexion chiffré, il nous faut un **certificat SSL**
 
-###  Certificate autosigné (self-signed)
+###  Certificat autosigné (self-signed)
 Créer un certificat autosigné est relativement facile, toutefois, votre navigateur ne se connectera pas à un websocket chiffré avec un certificat autosigné.  
        
 Il vous faut valider le certificat, en allant sur l'ip et le port de votre websocket : https://ip:port.    
