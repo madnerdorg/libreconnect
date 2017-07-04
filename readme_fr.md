@@ -1,4 +1,4 @@
-[English](http://github.com/madnerdorg/libreconnect)
+[English](https://madnerdorg.github.io/libreconnect/)
 
 [![LibreConnect Banner](doc/img/libreconnect_banner.png)](https://github.com/madnerdorg/libreconnect/releases)    
 [![Downloads](doc/img/lc_download.png)](https://github.com/madnerdorg/libreconnect/releases)    
@@ -7,11 +7,6 @@
 - [C'est quoi libreConnect ?](#cest-quoi-libreconnect-)
 - [Appareils](#appareils)
 - [Paramétrer LibreConnect](#paramétrer-libreconnect)
-    - [Ne pas connecter au réseau](#ne-pas-connecter-au-réseau)
-    - [Connectez n'importe quel périphérique série.](#connectez-nimporte-quel-périphérique-série)
-    - [Mot de passe](#mot-de-passe)
-    - [Chiffrement](#chiffrement)
-    - [Allumer / Eteindre à distance](#allumer--eteindre-à-distance)
 - [Comment libreConnect fonctionne](#comment-libreconnect-fonctionne)
 - [Créer ses propres applications](doc/fr/applications.md)
 - [Compiler LibreConnect](doc/fr/compile.md)

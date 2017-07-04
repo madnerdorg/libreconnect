@@ -1,4 +1,4 @@
-[![Devices libreconnect banner](../img/libreconnect_devices_banner.png)](https://github.com/libreconnect)
+[![Devices libreconnect banner](../img/libreconnect_devices_banner.png)](README.md)
 
 # [Test](#test) / [Leds](#leds) / [Radio433](#radio433) / [OpenLight](#openlight) / [TempHum](#temphum) / [Buzzer](#buzzer)
 Each device has instructions/code/applications/schematics.
