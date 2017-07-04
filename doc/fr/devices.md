@@ -27,12 +27,12 @@ Vous pouvez aussi sauvegarder l'état actuel des leds dans (la mémoire) l'eepro
 Contrôler des prises de courants et envoyer/recever des messages d'autres arduino.    
 [![Radio433](../img/radio433_photo.jpg)](https://madnerdorg.github.io/radio433/readme.fr)
 
-# [OpenLight](https://madnerdorg.github.io/openlight)
+# [OpenLight](https://madnerdorg.github.io/openlight/readme.fr)
 Controler des lampes milight directement sans passerelle.
 Vous pouvez ,en option, rajouter des boutons tactiles pour éteindre/allumer une lampe. 
 [![OpenLight](../img/openlight_photo.jpg)](https://madnerdorg.github.io/openlight)
 
-# [TempHum](https://madnerdorg.github.io/temphum/readme.fr)
+# [TempHum](https://madnerdorg.github.io/temphum/README.fr)
 Utiliser un capteur DHT11 pour mesurer la température/humidité, vous pouvez ,en option, ajouter une photo-résistance (luminosité)  
 [![TempHum](../img/temphum_photo.jpg)](https://madnerdorg.github.io/temphum/readme.fr)
 
