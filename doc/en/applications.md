@@ -1,4 +1,4 @@
-[![LibreConnect Banner](doc/img/libreconnect_banner.png)](https://madnerdorg.github.io/libreconnect/) 
+[![LibreConnect Banner](../img/libreconnect_banner.png)](https://madnerdorg.github.io/libreconnect/) 
 
 Build your own applications
 --------------

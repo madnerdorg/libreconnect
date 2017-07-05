@@ -2,7 +2,7 @@
 
 - [Installer LibreConnect sur un Raspberry Pi](#raspberry-piimgrpi_exepng-installer-libreconnect-sur-un-raspberry-pi)
 - [Lancer au démarrage](#lancer-au-démarrage)
-- [Rendre votre raspberry pi visible dans le réseau Windosw](#rendre-votre-raspberry-pi-visible-dans-le-réseau-windosw)
+- [Rendre votre raspberry pi visible dans le réseau Windows](#rendre-votre-raspberry-pi-visible-dans-le-réseau-windows)
 - [Fabriquer un hub wifi](#fabriquer-un-hub-wifi)
 
 # ![Raspberry Pi](../img/rpi_exe.png) Installer LibreConnect sur un Raspberry Pi
@@ -11,7 +11,7 @@ Si vous voulez installer libreConnect dans **/opt/libreConnect**
 ```
 mkdir /opt/libreconnect
 cd /opt/libreconnect
-wget https://github.com/madnerdorg/libreconnect/releases/download/97f9aff/libreconnect_rpi.zip
+wget https://github.com/madnerdorg/libreconnect/releases/download/1.0/libreconnect_rpi_v1.zip
 unzip libreconnect_rpi.zip
 ```
 Vous pouvez tester libreConnect avec cette commande:
@@ -26,7 +26,7 @@ cd /opt/libreconnect;./usb_scanner &
 ```
 > usb_scanner doit être lancé dans son dossier.
 
-# Rendre votre raspberry pi visible dans le réseau Windosw
+# Rendre votre raspberry pi visible dans le réseau Windows
 Vous pouvez utiliser samba sans **partager de fichiers** pour rendre votre Raspberry Pi visible sous Windows
 ![Netbios](../img/netbios.jpg)
 
@@ -57,6 +57,6 @@ Voici un concept pour créer un hub wifi à l'aide d'un Raspberry Pi Zero W qui 
 
 Vous pouvez trouver les fichiers stl files (et .blend) ici: https://github.com/madnerdorg/libreconnect/tree/master/stl/spidersocket
 
-J'ai utiliser un [Hub Anker 4-Port Ultra Slim USB3](https://www.anker.com/products/A7517011).    
+J'ai utilisé un [Hub Anker 4-Port Ultra Slim USB3](https://www.anker.com/products/A7517011).    
 ![Soldering usb hub on a Raspberry Pi Zero](../img/lc_rpizero_solderankerusb.jpg)
 

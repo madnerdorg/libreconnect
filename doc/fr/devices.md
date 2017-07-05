@@ -29,7 +29,7 @@ Contrôler des prises de courants et envoyer/recever des messages d'autres ardui
 
 # [OpenLight](https://madnerdorg.github.io/openlight/readme.fr)
 Controler des lampes milight directement sans passerelle.
-Vous pouvez ,en option, rajouter des boutons tactiles pour éteindre/allumer une lampe. 
+Vous pouvez ,en option, rajouter des boutons tactiles pour éteindre/allumer une lampe.   
 [![OpenLight](../img/openlight_photo.jpg)](https://madnerdorg.github.io/openlight)
 
 # [TempHum](https://madnerdorg.github.io/temphum/README.fr)

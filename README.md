@@ -1,9 +1,7 @@
 [Français](readme_fr.md)
 
 [![LibreConnect Banner](doc/img/libreconnect_banner.png)](https://madnerdorg.github.io/libreconnect/) 
-
 [![Downloads](doc/img/lc_download.png)](https://github.com/madnerdorg/libreconnect/releases)    
-
 [Download](https://github.com/madnerdorg/libreconnect/releases) / [Go to madnerd.org](https://madnerd.org) / [Videos](https://www.youtube.com/channel/UCODy2WlJf8FOgJzuKE14LkA)
 
 - [What is libreConnect](#what-is-libreconnect)
