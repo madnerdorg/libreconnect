@@ -179,6 +179,7 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
             if password is not False:
                 # Check if client is registered
                 if self in clients:
+                    print("["+name+"] [INFO]: <-- " + message)
                     write(message)
                 else:
                     ip, port = self.transport.client

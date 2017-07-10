@@ -14,7 +14,7 @@ from threading import Thread
 import serial
 from serial.tools import list_ports
 
-VERSION = "1.0"
+VERSION = "1.0.1"
 # Check serial ports every x seconds
 SCAN_SPEED = 1
 # If we failed to have an answer retry x times
