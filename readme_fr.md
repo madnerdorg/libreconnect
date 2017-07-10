@@ -15,17 +15,22 @@
 - [License](#license)
 
 # C'est quoi libreConnect ?
-[![Video Demo](doc/img/libreconnect_youtube.jpg)](https://www.youtube.com/watch?v=RrZaXerJBO8)  
 LibreConnect est un logiciel qui permet de contrôler des arduinos à l'aide de **websockets**.    
 Brancher un arduino sur un ordinateur ou un Raspberry Pi et controlez le à l'aide de votre **navigateur web**        
-
-![How does it works](doc/img/libreconnect_app.jpg)
+[![Video Demo](doc/img/libreconnect_youtube.jpg)](https://www.youtube.com/watch?v=RrZaXerJBO8)  
 
 **Aucun installation ou configuration n'est nécessaire**
 * [Télécharger](https://github.com/madnerdorg/libreconnect/releases) libreConnect
 * Cliquer sur **usb_scanner**
 * Brancher votre Arduino en USB.
 * Essayer votre appareil sur [madnerd.org/interface](http://madnerd.org/interface)    
+
+> Toutes les applications sont des pages web statique, aucun données ne sont envoyer à madnerd.org
+
+Avec une connaissance basique de HTML et JavaScript vous pouvez créer vos propres télécommandes pour contrôler des leds, capteurs, boutons, de la radio, n'importe quoi!   
+Pas besoin de serveur web pour utiliser ces applications, tout fonctionne dans votre navigateur web.
+
+![How it works](doc/img/libreconnect_app.jpg)
 
 # Appareils
 [![Video Demo](doc/img/demo_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)

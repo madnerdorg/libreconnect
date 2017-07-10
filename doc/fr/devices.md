@@ -18,9 +18,9 @@ Un code pour apprendre à faire ces propres appareils, ou essayer libreConnect
 Contrôler la led embarqué d'un arduino avec ce code.
 
 # [Leds](https://madnerdorg.github.io/leds/readme.fr)
-Controler une ou plus leds rgb.
-Vous pouvez animer les leds, ainsi que changer leur couleurs en utilisant la norme HSV (Teinte/Saturation/Valeur)
-Vous pouvez aussi sauvegarder l'état actuel des leds dans (la mémoire) l'eeprom de l'arduino
+Contrôler une ou plus leds rgb.        
+Vous pouvez animer les leds, ainsi que changer leur couleurs en utilisant la norme HSV (Teinte/Saturation/Valeur)       
+Vous pouvez aussi sauvegarder l'état actuel des leds dans (la mémoire) l'eeprom de l'arduino            
 [![Leds](../img/leds_photo.jpg)](https://madnerdorg.github.io/leds/readme.fr)
 
 # [Radio433](https://madnerdorg.github.io/radio433/readme.fr)
@@ -34,7 +34,7 @@ Vous pouvez ,en option, rajouter des boutons tactiles pour éteindre/allumer une
 
 # [TempHum](https://madnerdorg.github.io/temphum/README.fr)
 Utiliser un capteur DHT11 pour mesurer la température/humidité, vous pouvez ,en option, ajouter une photo-résistance (luminosité)  
-[![TempHum](../img/temphum_photo.jpg)](https://madnerdorg.github.io/temphum/readme.fr)
+[![TempHum](../img/temphum_photo.jpg)](https://madnerdorg.github.io/temphum/README.fr)
 
 # [Buzzer](https://madnerdorg.github.io/buzzer/readme.fr)
 Contrôler un buzzer comme si c'était un instrument MIDI.    

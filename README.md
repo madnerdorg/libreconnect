@@ -7,7 +7,7 @@
 - [What is libreConnect](#what-is-libreconnect)
 - [Devices](#devices)
 - [Setup LibreConnect](#setup-libreconnect)   
-- [How libreConnect works](#how-does-libreconnect-works)
+- [How libreConnect works](#how-libreconnect-works)
 - [Build your own applications](doc/en/applications.md)
 - [Compile LibreConnect](doc/en/compile.md)
 - [Use libreConnect on a Raspberry Pi](doc/en/raspberrypi.md)
@@ -202,7 +202,7 @@ Reboot server: @reboot
 ```
 
 
-# How does libreConnect works
+# How libreConnect works
 LibreConnect is two compiled python scripts: 
 
 ![LibreConnect Software](doc/img/LibreConnect_software.png) 

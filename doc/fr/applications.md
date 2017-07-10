@@ -8,6 +8,7 @@ Créer vos propres applications
 - [HTML/JS](#htmljs)
 - [Console de développement du navigateur web](#console-de-développement-du-navigateur-web)
 - [NodeJS](#nodejs)
+- [LibreInterface](#libreinterface)
 
 <!-- /TOC -->
 
@@ -54,5 +55,14 @@ WebSocket = require('rwebsocket');
 var ws = new WebSocket('ws://localhost:42000');
 ws.send("ON");
 ```
-Voici un example pour sauvegarder des mesures de température/d'humidité dans un fichier cvs[https://github.com/madnerdorg/temphum_client](https://github.com/madnerdorg/temphum_client)
+
+Voici un example pour sauvegarder des mesures de température/d'humidité dans un fichier csv   [https://github.com/madnerdorg/temphum_client](https://github.com/madnerdorg/temphum_client)
+
+
+# LibreInterface
+LibreInterface est un éditeur HTML/JS utilisable depuis un navigateur web, il peut fonctionner hors-ligne et on peut exporter/importer le code en JSON.    
+[Télécharger](https://madnerdorg.github.io/libreinterface/)       
+![](https://madnerdorg.github.io/libreinterface/doc/codeeditor.png)
+
+
 

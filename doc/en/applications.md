@@ -8,6 +8,7 @@ Build your own applications
 - [HTML/JS](#htmljs)
 - [Web Browser Dev Console](#web-browser-dev-console)
 - [NodeJS](#nodejs)
+- [LibreInterface](#libreinterface)
 
 <!-- /TOC -->
 
@@ -55,4 +56,10 @@ var ws = new WebSocket('ws://localhost:42000');
 ws.send("ON");
 ```
 Here is a basic example to log temperature/humidity on a CSV file : [https://github.com/madnerdorg/temphum_client](https://github.com/madnerdorg/temphum_client)
+
+# LibreInterface
+LibreInterface is an HTML/JS editor you can use on your web browser, It works offline.
+You can export/import your code with JSON.    
+[Télécharger](https://madnerdorg.github.io/libreinterface/)       
+![](https://madnerdorg.github.io/libreinterface/doc/codeeditor.png)
 
