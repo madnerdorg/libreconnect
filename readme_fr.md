@@ -48,7 +48,7 @@ Voilà quelques projets sympa , que vous pouvez faire avec libreConnect
 * [Contrôler des lampes et des prises de courants](http://madnerd.org/interface/homeautomation).
 * Soyez prévenu quand vous recevez un appel , à l'aide de [tasker sur android](https://madnerdorg.github.io/leds/readme.fr)
 * Contrôler un buzzer à l'aide de n'importe quel [logiciel de musique](https://madnerdorg.github.io/buzzer/readme.fr).
-* Construire des appareils et les utiliser en pleine nature! [video](https://www.youtube.com/edit?o=U&video_id=sHwIgMWFc-8)
+* Construire des appareils et les utiliser en pleine nature! [video](https://www.youtube.com/watch?v=sHwIgMWFc-8)
 * Faire ses propres [applications web](http://madnerd.org/interface/editor) en utilisant uniquement son navigateur web
 
 # Paramétrer LibreConnect
