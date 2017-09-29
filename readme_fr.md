@@ -55,7 +55,7 @@ Voilà quelques projets sympa , que vous pouvez faire avec libreConnect
 
 ## Paramètres
 Bien qu'il ne soit pas nécessaire de paramétrer libreConnect, vous pouvez utiliser des paramètres pour
-* Utiliser votre ordinateur uniquement depuis votre ordinateur
+* Utiliser votre arduino uniquement depuis votre ordinateur
 * Chiffrer / Protégé à l'aide d'un mot de passe votre websocket
 * Connectez n'importe quel arduino (ou périphériques série)
 
