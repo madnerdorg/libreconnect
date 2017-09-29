@@ -16,7 +16,7 @@
 
 # C'est quoi libreConnect ?
 LibreConnect est un logiciel qui permet de contrôler des arduinos à l'aide de **websockets**.    
-Brancher un arduino sur un ordinateur ou un Raspberry Pi et controlez le à l'aide de votre **navigateur web**        
+Branchez un arduino sur un ordinateur ou un Raspberry Pi et contrôlez-le à l'aide de votre **navigateur web**        
 [![Video Demo](doc/img/libreconnect_youtube.jpg)](https://www.youtube.com/watch?v=RrZaXerJBO8)  
 
 **Aucun installation ou configuration n'est nécessaire**
@@ -25,7 +25,7 @@ Brancher un arduino sur un ordinateur ou un Raspberry Pi et controlez le à l'ai
 * Brancher votre Arduino en USB.
 * Essayer votre appareil sur [madnerd.org/interface](http://madnerd.org/interface)    
 
-> Toutes les applications sont des pages web statique, aucun données ne sont envoyer à madnerd.org
+> Toutes les applications sont des pages web statiques, aucune donnée n’est envoyée à madnerd.org
 
 Avec une connaissance basique de HTML et JavaScript vous pouvez créer vos propres télécommandes pour contrôler des leds, capteurs, boutons, de la radio, n'importe quoi!   
 Pas besoin de serveur web pour utiliser ces applications, tout fonctionne dans votre navigateur web.
@@ -35,8 +35,8 @@ Pas besoin de serveur web pour utiliser ces applications, tout fonctionne dans v
 # Appareils
 [![Video Demo](doc/img/demo_youtube.jpg)](https://www.youtube.com/watch?v=7xJIdO-WGD4)
 
-Voici les [appareils](https://madnerdorg.github.io/libreconnect/doc/fr/devices.html) que j'ai fabriqué pour LibreConnect, ils ne coûtent pas cher et sont facile à fabriquer.     
-Ils sont aussi facile à **recycler** et **améliorer**.    
+Voici les [appareils](https://madnerdorg.github.io/libreconnect/doc/fr/devices.html) que j'ai fabriqué pour LibreConnect, ils ne coûtent pas cher et sont faciles à fabriquer.     
+Ils sont aussi faciles à **recycler** et **améliorer**.    
 
 [![Appareils](doc/img/devices_av.png)](https://madnerdorg.github.io/libreconnect/doc/fr/devices.html)
 
@@ -44,10 +44,10 @@ Du moment que votre code Arduino est capable **d'envoyer/recevoir** des commande
 Vous pouvez l'utiliser avec libreconnect.    
 ![What is Arduino](doc/img/whatisarduino.png) 
 
-Voilà quelques projets sympa , que vous pouvez faire avec libreConnect  
-* [Contrôler des lampes et des prises de courants](http://madnerd.org/interface/homeautomation).
+Voilà quelques projets sympas , que vous pouvez faire avec libreConnect  
+* [Contrôler des lampes et des prises de courant](http://madnerd.org/interface/homeautomation).
 * Soyez prévenu quand vous recevez un appel , à l'aide de [tasker sur android](https://madnerdorg.github.io/leds/readme.fr)
-* Contrôler un buzzer à l'aide de n'importe quel [logiciel de musique](https://madnerdorg.github.io/buzzer/readme.fr).
+* Contrôler un buzzer à l'aide de n'importe lequel [logiciel de musique](https://madnerdorg.github.io/buzzer/readme.fr).
 * Construire des appareils et les utiliser en pleine nature! [video](https://www.youtube.com/watch?v=sHwIgMWFc-8)
 * Faire ses propres [applications web](http://madnerd.org/interface/editor) en utilisant uniquement son navigateur web
 
@@ -56,7 +56,7 @@ Voilà quelques projets sympa , que vous pouvez faire avec libreConnect
 ## Paramètres
 Bien qu'il ne soit pas nécessaire de paramétrer libreConnect, vous pouvez utiliser des paramètres pour
 * Utiliser votre arduino uniquement depuis votre ordinateur
-* Chiffrer / Protégé à l'aide d'un mot de passe votre websocket
+* Chiffrer / protéger à l'aide d'un mot de passe votre websocket
 * Connectez n'importe quel arduino (ou périphériques série)
 
 ```
@@ -96,9 +96,9 @@ usb_scanner --force --baudrate 9600
 ```
 Ceci connectera tout les périphériques série avec un baudrate de 9600 en commençant par le port 40001
 
-##  Mot de passe
-Les **mot de passe** ne sont pour le moment qu'implémenter afin d'être tester, et de doivent pas être considéré comme sécurisé. 
-Je vous recommande fortement d'utiliser une connexion chiffré où votre mot de passe sera envoyé **en clair** sur votre réseau.
+##  Mots de passe
+Les **mots de passe** ne sont pour le moment qu'implémenter afin d'être tester, et de doivent pas être considéré comme sécurisé. 
+Je vous recommande fortement d'utiliser une connexion chiffrée où votre mot de passe sera envoyé **en clair** sur votre réseau.
 Si vous ne pouvez pas utiliser des certificats SSL, utiliser un **mot de passe temporaire**
 
 ```
@@ -119,20 +119,20 @@ function ws_onmessage(event){
 ```
 
 ###  Bannisement / Essai
-Vous pouvez bannir une ip qui a entré trop de fois un mauvais mot de passe.
-Par examples ici, tout ip qui aura échoué de rentrer un mot de passe 5 fois, ne pourra plus se connecter pendant 60 secondes.
+Vous pouvez bannir une IP qui a entré trop de fois un mauvais mot de passe.
+Par exemples ici, tout IP qui aura échoué de rentrer un mot de passe 5 fois, ne pourra plus se connecter pendant 60 secondes.
 ``` 
 usb_scanner --password HorseBatteryStaple --bantime 60 --retry 5
 ```
 
 ##  Chiffrement
-Par défaut, les websockets ne sont pas chiffré.
-Pour utiliser une connexion chiffré, il nous faut un **certificat SSL**
+Par défaut, les websockets ne sont pas chiffrés.
+Pour utiliser une connexion chiffrée, il nous faut un **certificat SSL**
 
 ###  Certificat autosigné (self-signed)
 Créer un certificat autosigné est relativement facile, toutefois, votre navigateur ne se connectera pas à un websocket chiffré avec un certificat autosigné.  
        
-Il vous faut valider le certificat, en allant sur l'ip et le port de votre websocket : https://ip:port.    
+Il vous faut valider le certificat, en allant sur l'IP et le port de votre websocket : https://ip:port.    
 Par example, https://localhost:42001
 
 Un certificat SSL est disponible dans keys/ pour tester, attention, il vous faut recréer ce certificat pour vraiment avoir une communication protégé (car la clé privée est accessible publiquement)
@@ -146,16 +146,16 @@ Si vous voulez mettre les certificats dans un autre dossier que keys/, vous pouv
 ./usb_scanner --secure --keys "/etc/libreconnect/keys"
 ```
 
-Dans **scripts/** il y a un scripts (openssl.bat) pour générer un nouveau certificat
+Dans **scripts/** il y a un script (openssl.bat) pour générer un nouveau certificat
 
 
 ###  Certificat Let's Encrypt
 Vous pouvez aussi générer un certificat valide grâce à let's encrypt.     
-Mais ceci est loin d'être simple et n'est utile que si vous accéder à votre websocket depuis internet.
+Mais ceci est loin d'être simple et n'est utile que si vous accédez à votre websocket depuis internet.
  
 Source: https://certbot.eff.org/#pip-other
 
-* Il nous faut un domaine dns (**par example devices.example.org**) qui redirige vers votre adresse ip
+* Il nous faut un domaine DNS (**par example devices.example.org**) qui redirige vers votre adresse IP
 * Il nous faut aussi ouvrir un **port 80**, depuis notre router
 * Sur un terminal **Raspberry Pi** / **Linux**, tapez:
 ```    
@@ -167,7 +167,7 @@ Après il nous faut générer le certificat manuellement
 ```
 ./certbot-auto certonly --manual -d devices.example.org
 ```
-* Suivez les instructions, et lancer un serveur web temporaire sur un autre terminal
+* Suivez les instructions, et lancez un serveur web temporaire sur un autre terminal
 * Récupérer les certificats crées, et copiez les dans keys/
 
 ##  Allumer / Eteindre à distance
@@ -185,9 +185,9 @@ Reboot server: @reboot
 # Comment libreConnect fonctionne
 LibreConnect , c'est deux scripts python compilé:    
 ![](doc/img/LibreConnect_software.png)     
-* usb_scanner cherches des périphériques USB série qui viennent d'être branché.
-* Puis leur envoie **/info**
-* Si le périphérique réponds **device:port**,      
+* usb_scanner cherche des périphériques USB série qui viennent d'être branchée.
+* Puis leur envoi **/info**
+* Si le périphérique répond **device:port**,      
 * Alors une instance de **connector.exe** est crée et connecte le port série à un websocket grâce à [autobahn](http://crossbar.io/autobahn/)   
            
 ![New device schematics](doc/img/lc_newdevice_schematics.png)
@@ -215,3 +215,4 @@ madnerd.org - Control Arduino with a portable app
 * Pyserial : BSD-3 - Chris Liechti [https://github.com/pyserial/pyserial](https://github.com/pyserial/pyserial)
 * Twisted : MIT - Glyph Lefkowitz [https://pypi.python.org/pypi/Twisted](https://pypi.python.org/pypi/Twisted)
 * Icons / Images are from the [https://thenounproject.com/](https://thenounproject.com/) (Creative Commons By): [Complete licence](doc/img/licence.txt)
+
