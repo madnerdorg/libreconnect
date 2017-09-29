@@ -29,7 +29,7 @@ When an arduino is plugged on a USB port, It generates a websocket which can be 
 
 > All applications are static web page, no data is sent to madnerd.org   
 
-You only need basic knowdledge of HTML and JavaScript to build your own remotes, to control leds, sensors, buttons, radio, anything!   
+You only need basic knowledge of HTML and JavaScript to build your own remote, to control leds, sensors, buttons, radio, anything!   
 No web server is required to use these applications, just a web browser.
 
 
@@ -55,7 +55,7 @@ I also made some examples of what you can do with it:
 
 As long as your arduino code is able **send/receive** commands using USB serial. 
 You can use it with libreconnect.     
-You can easily convert any code you can find on the internet to works with libreConnect.
+You can easily convert any code you can find on the internet to work with libreConnect.
 ![What is Arduino](doc/img/whatisarduino.png) 
 
 # Setup LibreConnect
@@ -238,4 +238,5 @@ madnerd.org - Control Arduino with a portable app
 * Autobahn : MIT - Crossbar.io [http://autobahn.ws/python/](http://autobahn.ws/python/)
 * Pyserial : BSD-3 - Chris Liechti [https://github.com/pyserial/pyserial](https://github.com/pyserial/pyserial)
 * Twisted : MIT - Glyph Lefkowitz [https://pypi.python.org/pypi/Twisted](https://pypi.python.org/pypi/Twisted)
-* Icons / Images are from the [https://thenounproject.com/](https://thenounproject.com/) (Creative Commons By): [Complete licence](doc/img/licence.txt)
+* Icons / Images are from the [https://thenounproject.com/](https://thenounproject.com/) (Creative Commons By): [Complete license](doc/img/licence.txt)
+
