@@ -66,19 +66,28 @@ While you don't need to setup libreConnect, you can use arguments to
 * Encrypt / Password-protect your websocket
 * Connect any arduino (or serial devices). 
 ```
--h, --help show this help message and exit
---serial SERIAL Serial port
---port PORT Websocket port
---secure Add SSL
---power Add power management (@reboot/@poweroff)
---password PASSWORD Password for the websocket
---local Websocket will only be available locally
---bantime BANTIME Seconds before a ban user is unbanned
---retry RETRY Number of retry before ban
---baudrate BAUDRATE Baudrate for serial com
---keys KEYS folders where SSL certificates are
---force Connect any serial devices 
+  -h, --help           show this help message and exit
+  --serial SERIAL      Serial port
+  --port PORT          Websocket port
+  --secure             Add SSL
+  --power              Add power management (@reboot/@poweroff)
+  --password PASSWORD  Password for the websocket
+  --local              Websocket will only be available locally
+  --bantime BANTIME    Seconds before a ban user is unbanned
+  --retry RETRY        Number of retry before ban
+  --baudrate BAUDRATE  Baudrate for serial com
+  --keys KEYS          folders where SSL certificates are
+  --force              Connect any serial devices
+  --settings SETTINGS  Setting file
+  --debug              Debug Mode
 ```
+## Settings file (v1.1)
+You can use a settings file (in ini) to pass arguments to usb_scanner and connector.
+You can find an example in **libreconnect.ini.example** (by default libreconnect.ini is used)
+```
+usb_scanner --settings settings/libreconnect.ini
+```
+
 ## Do not connect to network
 If you want to use libreConnect only on the machine where it is plugged, just add **--local**. 
 This is recommended if you are **not on your own network**. 
