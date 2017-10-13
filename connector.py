@@ -295,7 +295,7 @@ else:
 if password:
     settings_text = settings_text + "PASSWORD "
 
-addr = ws_type+"0.0.0.0"+":"+port
+addr = ws_type+"0.0.0.0"+":"+str(port)
 
 # We start the websocket here
 factory = WebSocketServerFactory(addr)
@@ -314,7 +314,7 @@ else:
     listenWS(factory, interface=interface)
 
 if not failed_start:
-    print("["+name+"] "  + "[INFO]: " + ws_type + server_ip + ":" + port + " " + settings_text)
+    print("["+name+"] "  + "[INFO]: " + ws_type + server_ip + ":" + str(port) + " " + settings_text)
 
     factory.protocol = ArduinoServerProtocol
 

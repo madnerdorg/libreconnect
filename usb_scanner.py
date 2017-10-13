@@ -16,7 +16,7 @@ from serial.tools import list_ports
 
 import ConfigParser
 
-VERSION = "1.1"
+VERSION = "1.1.1"
 # Check serial ports every x seconds
 SCAN_SPEED = 1
 # If we failed to have an answer retry x times
