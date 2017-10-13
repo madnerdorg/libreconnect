@@ -71,7 +71,15 @@ Bien qu'il ne soit pas nécessaire de paramétrer libreConnect, vous pouvez util
   --retry RETRY        Number of retry before ban
   --baudrate BAUDRATE  Baudrate for serial com
   --keys KEYS          folders where SSL certificates are
-  --force              Connect any serial devices  
+  --force              Connect any serial devices
+  --settings SETTINGS  Setting file
+  --debug              Debug Mode
+```
+## Fichier de configuration (v1.1)
+Vous pouvez utiliser un fichier de configuration (un fichier ini) pour paramétrer usb_scanner et connector     
+Un exemple est disponible dans le fichier **libreconnect.ini.example** (par défaut libreconncet.ini est utilisé)
+```
+usb_scanner --settings settings/libreconnect.ini
 ```
 
 ## Ne pas connecter au réseau
