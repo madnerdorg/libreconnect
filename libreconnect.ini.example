@@ -1,0 +1,11 @@
+[settings]
+local = False
+password = False
+hash = False
+baudrate = 115200
+bantime = 0
+retry = 10
+power = False
+secure = False
+keys = "keys/"
+force = False

@@ -18,16 +18,18 @@ from autobahn.twisted.websocket import WebSocketServerFactory, WebSocketServerPr
 import serial
 import socket
 
+import ConfigParser
+next_port = 40000
 
 # https://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
 server_ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
-
+config_file = False
 # Arguments
 parser = argparse.ArgumentParser(
     description="Transform a serial port into a websocket")
 parser.add_argument("--serial", default="", help="Serial port")
-parser.add_argument("--port", default="42001",
+parser.add_argument("--port", default=next_port,
                     help="Websocket port")
 parser.add_argument("--secure", default=False, action="store_true",
                     help="Add SSL")
@@ -44,10 +46,41 @@ parser.add_argument("--baudrate", default="115200",
                     help="Baudrate for serial com")
 parser.add_argument("--keys", default="keys/",
                     help="folders where SSL certificates are")
+parser.add_argument("--force", default=False, action="store_true",
+                    help="Connect any serial devices")
+parser.add_argument("--settings", default="libreconnect.ini",
+                    help="Setting file")
+parser.add_argument("--debug", default=False, action="store_true",
+                    help="Debug Mode")
+
 parser.add_argument("--name", default="unknown",
                     help="Device name")
 
 args = vars(parser.parse_args())
+
+if args["debug"]:
+    print("Arguments -------------")
+    print(args)
+
+# Configuration File
+if os.path.isfile(args["settings"]):
+    config_file = True
+    # print("Settings founded")
+    settings = ConfigParser.ConfigParser()
+    settings.read(args["settings"])
+    # print args
+    for name,arg in args.items():
+        try:
+            args[name] = settings.get("settings",name)
+        #print(name)
+        #print(arg)
+        except:
+            pass
+            # print("Pass" + name)
+    #print args
+    if args["debug"]:
+        print("Configuration File -------------")
+        print(args)   
 
 # Settings
 password = args["password"]

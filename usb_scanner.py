@@ -14,23 +14,25 @@ from threading import Thread
 import serial
 from serial.tools import list_ports
 
-VERSION = "1.0.1"
+import ConfigParser
+
+VERSION = "1.1"
 # Check serial ports every x seconds
 SCAN_SPEED = 1
 # If we failed to have an answer retry x times
 RETRY_CONNECTION = 3
-
+next_port = 40000
 
 devices_ports = []
 devices_name = []
 devices_websocket = []
-
+config_file = False
 
 # Arguments
 parser = argparse.ArgumentParser(
     description="Transform a serial port into a websocket")
 parser.add_argument("--serial", default="", help="Serial port")
-parser.add_argument("--port", default="42001",
+parser.add_argument("--port", default=next_port,
                     help="Websocket port")
 parser.add_argument("--secure", default=False, action="store_true",
                     help="Add SSL")
@@ -49,11 +51,47 @@ parser.add_argument("--keys", default="keys/",
                     help="folders where SSL certificates are")
 parser.add_argument("--force", default=False, action="store_true",
                     help="Connect any serial devices")
+parser.add_argument("--settings", default="libreconnect.ini",
+                    help="Setting file")
+parser.add_argument("--debug", default=False, action="store_true",
+                    help="Debug Mode")
 
 args = vars(parser.parse_args())
-arguments = " ".join(sys.argv[1:])
+
+if args["debug"]:
+    print("Arguments -------------")
+    print(args)
+
+# Configuration File
+if os.path.isfile(args["settings"]):
+    config_file = True
+    # print("Settings founded")
+    settings = ConfigParser.ConfigParser()
+    settings.read(args["settings"])
+    # print args
+    for name,arg in args.items():
+        try:
+            args[name] = settings.get("settings",name)
+        #print(name)
+        #print(arg)
+        except:
+            pass
+            # print("Pass" + name)
+    #print args
+    if args["debug"]:
+        print("Configuration File -------------")
+        print(args)   
+
+# Remove Force from arguments as it doesn't need to be pass to connector
 if args["force"]:
     arguments = arguments.replace("--force", "")
+# Generating arguments list
+if config_file:
+    arguments = " " + "--settings " + args["settings"]
+    if args["debug"]:
+       arguments = arguments + " " + "--debug" 
+else:
+    arguments = " ".join(sys.argv[1:])
 
 print("LibreConnect - version " + VERSION)
 print("By madnerd.org (https://github.com/madnerdorg/libreconnect)")
@@ -68,9 +106,6 @@ else:
     else:
         connector_software = "./connector"
 
-
-
-next_port = 40000
 def get_info(usb_port):
     """
         # Connected to arduino send /info and get answer
@@ -133,7 +168,8 @@ def connector_thread(name, usb_port, websocket_port):
     command = command + ' --name ' + name
     command = command + ' --port '+str(websocket_port)
     command = command + " " + arguments
-    # print("[INFO]: " + command)
+    if args["debug"]:
+        print("[INFO]: " + command)
     os.system(command)
 
 
