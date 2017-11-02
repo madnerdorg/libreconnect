@@ -74,6 +74,7 @@ Bien qu'il ne soit pas nécessaire de paramétrer libreConnect, vous pouvez util
   --force              Connect any serial devices
   --settings SETTINGS  Setting file
   --debug              Debug Mode
+  --password_hash      Hashed password for websocket
 ```
 ## Fichier de configuration (v1.1)
 Vous pouvez utiliser un fichier de configuration (un fichier ini) pour paramétrer usb_scanner et connector     
@@ -104,8 +105,18 @@ usb_scanner --force --baudrate 9600
 ```
 Ceci connectera tout les périphériques série avec un baudrate de 9600 en commençant par le port 40001
 
+## Mot de passe hash (v1.2)
+Générer un hash pour le mot de passe (Il est conseillé de l'utiliser dans un fichier de configuration)
+```
+generate_password --password HorseBatteryStaple
+```
+
+```
+usb_scanner --password_hash $argon2i$v=19$m=512,t=2,p=2$oGywE+G38a/7zx48GgG99A$NDvr/qtQ2tH4mJvUWN6zdg
+```
+
 ##  Mots de passe
-Les **mots de passe** ne sont pour le moment qu'implémenter afin d'être tester, et de doivent pas être considéré comme sécurisé. 
+Les hash de mot de passe sont disponible maintenant, il n'est pas conseillé d'utiliser ce paramètre.   
 Je vous recommande fortement d'utiliser une connexion chiffrée où votre mot de passe sera envoyé **en clair** sur votre réseau.
 Si vous ne pouvez pas utiliser des certificats SSL, utiliser un **mot de passe temporaire**
 
