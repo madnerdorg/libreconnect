@@ -1,7 +1,6 @@
 [settings]
 local = False
 password = False
-hash = False
 baudrate = 115200
 bantime = 0
 retry = 10

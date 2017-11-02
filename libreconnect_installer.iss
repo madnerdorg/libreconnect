@@ -4,7 +4,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "LibreConnect"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.2"
 #define MyAppPublisher "madnerd.org"
 #define MyAppURL "http://github.com/madnerdorg/libreconnect"
 #define MyAppExeName "usb_scanner.exe"

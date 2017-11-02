@@ -5,20 +5,26 @@
  License : MIT
 '''
 
+import argparse
+import ConfigParser
+import os
+import platform
+import socket
+import threading
 # Arguments/ Time
 import time
-import argparse
 from subprocess import call
-import platform
-import os
-import threading
-# Autobahn/Twisted websocket
-from twisted.internet import reactor, ssl, protocol
-from autobahn.twisted.websocket import WebSocketServerFactory, WebSocketServerProtocol, listenWS
-import serial
-import socket
 
-import ConfigParser
+import serial
+from argon2 import PasswordHasher, exceptions
+from autobahn.twisted.websocket import (WebSocketServerFactory,
+                                        WebSocketServerProtocol, listenWS)
+# Autobahn/Twisted websocket
+from twisted.internet import protocol, reactor, ssl
+
+# Hashed password
+import _cffi_backend  # Need for pyinstaller
+
 next_port = 40000
 
 # https://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
@@ -52,7 +58,8 @@ parser.add_argument("--settings", default="libreconnect.ini",
                     help="Setting file")
 parser.add_argument("--debug", default=False, action="store_true",
                     help="Debug Mode")
-
+parser.add_argument("--password_hash", default=False,
+                    help="Hashed password for websocket")
 parser.add_argument("--name", default="unknown",
                     help="Device name")
 
@@ -80,10 +87,11 @@ if os.path.isfile(args["settings"]):
     #print args
     if args["debug"]:
         print("Configuration File -------------")
-        print(args)   
+        print(args)
 
 # Settings
 password = args["password"]
+password_hash = args["password_hash"]
 bantime = float(args["bantime"])
 maxretry = int(args["retry"])
 local = args["local"]
@@ -135,9 +143,9 @@ def search_key(value, list, key):
 # Force websocket to stop
 def websocket_off():
     try:
-            device.close()
+        device.close()
     except:
-            print("["+name+"] "  + "[WARN]: Device not closed properly")
+        print("["+name+"] "  + "[WARN]: Device not closed properly")
     os._exit(1)
 
 
@@ -172,7 +180,7 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
         print("["+name+"] " + '[INFO]: '+ ip + ":" + args["port"] + ' connected')
 
         # Ban manager
-        if password is not False:
+        if password is not False or password_hash is not False:
             global suspected_clients
             connectiontime = time.time()
 
@@ -181,7 +189,7 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
             if suspected:
                 user = suspected[0]
                 ban_remaining_time = connectiontime - user["time"]
-                
+
                 # If user ban time is over, unban
                 if connectiontime-(user['time']) > bantime:
                     suspected_clients.remove(suspected[0])
@@ -198,7 +206,7 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
     # On open we ask for a password
     def onOpen(self):
         # print("[INFO]: WebSocket connection open.")
-        if password is not False:
+        if password is not False or password_hash is not False:
             self.sendMessage(str("@password").encode())
 
     # On message we check for the password
@@ -209,7 +217,7 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
         # print(clients)
         if not isBinary:
             message = payload.decode("utf-8")
-            if password is not False:
+            if password is not False or password_hash is not False:
                 # Check if client is registered
                 if self in clients:
                     print("["+name+"] [INFO]: <-- " + message)
@@ -225,12 +233,24 @@ class ArduinoServerProtocol(WebSocketServerProtocol):
                     # print(blocked)
 
                     if blocked is False:
-                        if message == password:
+                        password_check = False
+                        if password is not False:
+                            if message == password:
+                                password_check = True
+                        if password_hash is not False:
+                            try:
+                                ph = PasswordHasher()
+                                ph.verify(password_hash,message)
+                                password_check = True
+                            except exceptions.VerifyMismatchError:
+                                password_check = False
+
+                        if password_check:
                             print("["+name+"] [INFO]: " + ip +":"+args["port"] + " is logged in")
                             self.sendMessage(str("@logged").encode())
                             if self not in clients:
                                 clients.append(self)
-                        else:                            
+                        else:
                             # print(suspected_clients)
                             suspect = search_key(ip, suspected_clients, 'ip')
                             if suspect is not False:
@@ -305,7 +325,7 @@ failed_start = False
 if secure:
     if os.path.isfile(ssl_dir+"/privkey.pem") and os.path.isfile(ssl_dir+"/cert.pem"):
         contextFactory = ssl.DefaultOpenSSLContextFactory(ssl_dir+'/privkey.pem',
-                                                        ssl_dir+'/cert.pem')
+                                                          ssl_dir+'/cert.pem')
         listenWS(factory, contextFactory, interface=interface)
     else:
         print("[ERROR]: I can't find "+ ssl_dir +"cert.pem"+" and/or "+ ssl_dir +'privkey.pem')

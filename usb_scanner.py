@@ -6,6 +6,7 @@
  License : MIT
 '''
 import argparse
+import ConfigParser
 import os
 import sys
 import time
@@ -14,9 +15,7 @@ from threading import Thread
 import serial
 from serial.tools import list_ports
 
-import ConfigParser
-
-VERSION = "1.1.1"
+VERSION = "1.2"
 # Check serial ports every x seconds
 SCAN_SPEED = 1
 # If we failed to have an answer retry x times
@@ -80,7 +79,7 @@ if os.path.isfile(args["settings"]):
     #print args
     if args["debug"]:
         print("Configuration File -------------")
-        print(args)   
+        print(args)
 
 # Remove Force from arguments as it doesn't need to be pass to connector
 if args["force"]:
@@ -89,7 +88,7 @@ if args["force"]:
 if config_file:
     arguments = " " + "--settings " + args["settings"]
     if args["debug"]:
-       arguments = arguments + " " + "--debug" 
+        arguments = arguments + " " + "--debug"
 else:
     arguments = " ".join(sys.argv[1:])
 

@@ -8,5 +8,6 @@ pip install urlparse2
 pip install websocket-client
 pip install pyinstaller
 pip install pypiwin32
+pip install argon2
 pause
 cd scripts
