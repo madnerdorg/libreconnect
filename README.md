@@ -80,6 +80,7 @@ While you don't need to setup libreConnect, you can use arguments to
   --force              Connect any serial devices
   --settings SETTINGS  Setting file
   --debug              Debug Mode
+  --password_hash      Hashed password for websocket
 ```
 ## Settings file (v1.1)
 You can use a settings file (in ini) to pass arguments to usb_scanner and connector.
@@ -111,9 +112,18 @@ usb_scanner --force --baudrate 9600
 ```
 This will connect any serial devices using baudrate 9600 starting with 40001.
 
+## Password hash (v1.2)
+Generate a password hash (it is recommended to use it inside a settings file)
+```
+generate_password --password HorseBatteryStaple
+```
+
+```
+usb_scanner --password_hash $argon2i$v=19$m=512,t=2,p=2$oGywE+G38a/7zx48GgG99A$NDvr/qtQ2tH4mJvUWN6zdg
+```
 
 ## Password
-Passwords are implemented for **testing**, and should not be considered secure.      
+Hashed password is now available, it isn't recommended to use this parameters.
 I recommended using encrypted communication or your password will be sent **unencrypted** on your network.     
 If encryption is not possible, use **temporary password**.
 
