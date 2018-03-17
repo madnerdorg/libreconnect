@@ -1,10 +1,26 @@
 [settings]
+serial_scan_interval = 1
+serial_scan_retry = 3
+
 local = False
+power_commands = False
+
+ssl = False
+ssl_certs = "certs/"
+
 password = False
-baudrate = 115200
-bantime = 0
-retry = 10
-power = False
-secure = False
-keys = "keys/"
-force = False
+ip_ban_duration = 0
+ip_ban_retry = 10
+
+
+libreconnect_baudrate = 115200
+mysensors_baudrate = 38400
+firmata_baudrate = 57600
+unknown_baudrate = 9600
+unknown_question = "hi"
+
+libreconnect = True
+firmata = True
+mysensors = True
+unknown = True
+

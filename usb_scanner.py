@@ -5,151 +5,163 @@
  Email : remi@madnerd.org
  License : MIT
 '''
-import argparse
-import ConfigParser
+
 import os
 import sys
 import time
+from pyfirmata import Arduino, util
 from threading import Thread
 
 import serial
 from serial.tools import list_ports
 
+from modules import settings_parser
+
 VERSION = "1.2"
-# Check serial ports every x seconds
-SCAN_SPEED = 1
-# If we failed to have an answer retry x times
-RETRY_CONNECTION = 3
-next_port = 40000
+
 
 devices_ports = []
 devices_name = []
 devices_websocket = []
 config_file = False
 
-# Arguments
-parser = argparse.ArgumentParser(
-    description="Transform a serial port into a websocket")
-parser.add_argument("--serial", default="", help="Serial port")
-parser.add_argument("--port", default=next_port,
-                    help="Websocket port")
-parser.add_argument("--secure", default=False, action="store_true",
-                    help="Add SSL")
-parser.add_argument("--power", default=False, action="store_true",
-                    help="Add power management (@reboot/@poweroff)")
-parser.add_argument("--password", default=False,
-                    help="Password for the websocket")
-parser.add_argument("--local", default=False, action="store_true",
-                    help="Websocket will only be available locally")
-parser.add_argument("--bantime", default=0,
-                    help="Seconds before a ban user is unbanned")
-parser.add_argument("--retry", default=10, help="Number of retry before ban")
-parser.add_argument("--baudrate", default="115200",
-                    help="Baudrate for serial com")
-parser.add_argument("--keys", default="keys/",
-                    help="folders where SSL certificates are")
-parser.add_argument("--force", default=False, action="store_true",
-                    help="Connect any serial devices")
-parser.add_argument("--settings", default="libreconnect.ini",
-                    help="Setting file")
-parser.add_argument("--debug", default=False, action="store_true",
-                    help="Debug Mode")
-
-args = vars(parser.parse_args())
-
-if args["debug"]:
-    print("Arguments -------------")
-    print(args)
-
-# Configuration File
-if os.path.isfile(args["settings"]):
-    config_file = True
-    # print("Settings founded")
-    settings = ConfigParser.ConfigParser()
-    settings.read(args["settings"])
-    # print args
-    for name,arg in args.items():
-        try:
-            args[name] = settings.get("settings",name)
-        #print(name)
-        #print(arg)
-        except:
-            pass
-            # print("Pass" + name)
-    #print args
-    if args["debug"]:
-        print("Configuration File -------------")
-        print(args)
+args = settings_parser.get()
+args, config_file = settings_parser.get_from_file(args)
 
 # Remove Force from arguments as it doesn't need to be pass to connector
-if args["force"]:
-    arguments = arguments.replace("--force", "")
-# Generating arguments list
+# if args["force"]:
+# arguments = arguments.replace("--force", "")
+
+# Generating arguments list for connector if config_file exists
+# Just set settings file location so connector can get settings from there
 if config_file:
-    arguments = " " + "--settings " + args["settings"]
+    arguments = " " + "--settings " + args["settings_file"]
     if args["debug"]:
         arguments = arguments + " " + "--debug"
 else:
     arguments = " ".join(sys.argv[1:])
 
+next_port = args["port"]
+print(next_port)
 print("LibreConnect - version " + VERSION)
 print("By madnerd.org (https://github.com/madnerdorg/libreconnect)")
 print("----------------------------------------------------------")
 
-# Check if python file existed, if not default to compiled version
-if os.path.exists("connector.py"):
-    connector_software = "python connector.py"
-else:
-    if sys.platform == "win32":
-        connector_software = "connector.exe"
-    else:
-        connector_software = "./connector"
+# Get connector for windows or linux, if a python version exists use it instead
+connector_software = settings_parser.get_connector()
 
-def get_info(usb_port):
+def get_device(usb_port,device, baudrate, question):
+    """ Check what device this is using a string as a question
+        If the device send back a message with answer in it, return his name and port
+    
+    Arguments:
+        usb_port {string} --  USB port (COM12 or /dev/ttyUSB0)
+        device {string} -- usb device type (libreconnect/mysensors)
+        baudrate {integer} -- serial baudrate
+        question {string} -- message to send
+        answer {string} -- message to receive
+    
+    Returns:
+        name,port {string/integer} -- name of device and port
     """
-        # Connected to arduino send /info and get answer
-    """
-    retry = RETRY_CONNECTION
+    name = ""
+    port = ""
+    retry = args["serial_retry"] 
     try:
-        arduino = serial.Serial(usb_port, args["baudrate"],
+        arduino = serial.Serial(usb_port, baudrate,
                                 writeTimeout=1, timeout=1)
-        if args["force"]:
-            name = "unknown"
-            global next_port
-            port = next_port
-            next_port = next_port + 1
-        else:
-            time.sleep(2)
-            while retry > 0:
-                # Ask for information
-                arduino.write("/info".encode())
-                arduino.flushInput()
+        time.sleep(2)
+        while retry > 0:
+            arduino.write(question.encode())
+            arduino.flushInput()
 
-                # Get answer
-                device_info = arduino.readline().strip()
-                device_info = device_info.decode()
-
+            # Get answer
+            device_info = arduino.readline().strip()
+            device_info = device_info.decode()
+            
+            if device is "mysensors":
+                print("Check ...")
+                if ";" in device_info:
+                    name = "mysensors"
+                    port = 42042
+                    retry = 0
+            elif device is "libreconnect":
                 if ":" in device_info:
                     device_array = device_info.split(":")
                     name = device_array[0]
                     port = device_array[1]
                     retry = 0
-                else:
-                    print("[WARNING]: Retry")
-                    name = ""
-                    port = ""
-                retry = retry - 1
+            if name == "" and port == "":
+                print("[WARN]: Retry")
+            retry = retry - 1
         arduino.close()
         return name, port
     except Exception as serial_error:
         print("[ERROR]: " + str(serial_error))
-        return "", ""
+        return "ERROR", ""
+
+def get_firmata(usb_port):
+    """ Try to connect to a firmata device
+    
+    Arguments:
+        usb_port {[string]} -- USB port (COM12 or /dev/ttyUSB0)
+    
+    Returns:
+        [name,port] -- Return name and port
+    """
+
+    retry = args["serial_retry"]
+    while retry > 0:
+        try: 
+            board = Arduino(usb_port,timeout=1)
+            if board.firmware is not None:
+                print(board.firmware)
+                board.exit()
+                return "firmata","42043"
+            board.exit()          
+        except Exception as serial_error:
+            print("[ERROR]: " + str(serial_error))
+            return "ERROR",""
+        retry = retry - 1
+    return "",""
 
 
+def get_devices(usb_port):
+    global next_port
+    """
+        # Connected to arduino and check it using serial command
+    """    
+    if args["firmata"]:
+        print("Firmata scan...")
+        name,port = get_firmata(usb_port)
+        if name != "" and port != "": return name,port
+        if name == "ERROR": return "",""
+
+    if args["mysensors"]:
+        print("Mysensors scan...")
+        name,port = get_device(usb_port, "mysensors", args["mysensors_baudrate"], "0;0;3;0;2;0;0\n")
+        if name != "" and port != "": return name,port
+        if name == "ERROR": return "",""
+
+    if args["libreconnect"]:
+        print("LibreConnect scan...")
+        name, port = get_device(usb_port, "libreconnect", args["libreconnect_baudrate"], "/info")
+        if name != "" and port != "": return name,port
+        if name == "ERROR": return "",""
+
+    if args["unknown"]:
+        name = "unknown"
+        port = next_port
+        next_port = next_port + 1
+    print(name,port)
+
+    return name,port
 
 def get_ports():
     """
-        # Get current serials port and put name in an array
+        # Get serials port list and put it in an array
+
+        return: devices list
     """
     raw_devices = list_ports.comports()
     devices = []
@@ -157,11 +169,9 @@ def get_ports():
         devices.append(raw_device[0])
     return devices
 
-
-
 def connector_thread(name, usb_port, websocket_port):
     """
-        # Start connector
+        Start connector
     """
     command = connector_software + ' --serial ' + str(usb_port)
     command = command + ' --name ' + name
@@ -171,18 +181,15 @@ def connector_thread(name, usb_port, websocket_port):
         print("[INFO]: " + command)
     os.system(command)
 
-
 def connect(name, usb_port, websocket_port):
     """
-        # Start seperate thread for connector
+        Start seperate thread for connector
     """
     new_connector = Thread(target=connector_thread,
                            args=(name, usb_port, websocket_port))
     new_connector.daemon = True
     new_connector.start()
     # connectors.append(new_connector)
-
-
 
 def scan_devices():
     """
@@ -193,7 +200,7 @@ def scan_devices():
         if usb_port not in devices_ports:
             print("[NEW]: " + usb_port)
             devices_ports.append(usb_port)
-            name, ws_port = get_info(usb_port)
+            name, ws_port = get_devices(usb_port)
 
             if name != "" and ws_port != "":
                 connect(name, usb_port, ws_port)
@@ -217,4 +224,4 @@ while True:
     print("Websockets")
     print(devices_websocket)
     """
-    time.sleep(SCAN_SPEED)
+    time.sleep(args["serial_scan_interval"])

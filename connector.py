@@ -3,6 +3,8 @@
  Author : Remi Sarrailh (madnerd.org)
  Email : remi@madnerd.org
  License : MIT
+ Largely based on this tutorial by Simply Automationized
+ https://simplyautomationized.blogspot.fr/2015/09/raspberry-pi-create-websocket-api.html
 '''
 
 import argparse
@@ -11,6 +13,7 @@ import os
 import platform
 import socket
 import threading
+from pyfirmata import Arduino, util
 # Arguments/ Time
 import time
 from subprocess import call
@@ -99,6 +102,7 @@ secure = args["secure"]
 port = args["port"]
 ssl_dir = args["keys"]
 name = args["name"]
+debug = args["debug"]
 
 power_management = args["power"]
 
@@ -116,7 +120,12 @@ suspected_clients = []
 
 # We generate our device
 try:
-    device = serial.Serial(device_serial, device_baudrate, timeout=0.01)
+    if name == "firmata":
+        device = Arduino(device_serial) 
+        it = util.Iterator(device)
+        it.start()
+    else:
+        device = serial.Serial(device_serial, device_baudrate, timeout=0.01)
 except:
     print("["+name+"] "  + "[ERROR]: Serial connection failed")
 
@@ -143,7 +152,10 @@ def search_key(value, list, key):
 # Force websocket to stop
 def websocket_off():
     try:
-        device.close()
+        if name == "firmata":
+            device.exit()
+        else:
+            device.close()
     except:
         print("["+name+"] "  + "[WARN]: Device not closed properly")
     os._exit(1)
@@ -165,17 +177,33 @@ def write(message):
                 call(["scripts\\poweroff.bat"])
             else:
                 call(["poweroff"])
-
-    else:
-        # Send to arduino
-        device.write(message.encode())
-
+    else:       
+        if name == "firmata":
+            command = "device." + message
+            global clients
+            try:
+                data = eval(command)
+                #print(command)
+                #print(data)
+                for client in clients:
+                    print("["+name+"] [INFO]: --> "+str(data))
+                    client.sendMessage(str(data))
+            except Exception as error:
+                print("[ERROR]" + str(error))
+                for client in clients:
+                    client.sendMessage(str(error))
+        # Send to arduino (linebreak)
+        elif name == "mysensors":
+            device.write(message.encode() + "\n")
+        else:
+            device.write(message.encode())
 
 # Websocket manager class
 class ArduinoServerProtocol(WebSocketServerProtocol):
     # On connect we check if the user was banned
     def onConnect(self, request):
         # print(suspected_clients)
+        print(self.websocket_origin)
         ip, port = self.transport.client
         print("["+name+"] " + '[INFO]: '+ ip + ":" + args["port"] + ' connected')
 
@@ -291,11 +319,14 @@ def start_listen():
     while True:
         try:
             data = False
-            data = device.readline().strip()
-            if data is not b'':
-                for client in clients:
-                    print("["+name+"] [INFO]: --> "+str(data))
-                    client.sendMessage(data)
+            if name == "firmata":
+                pass
+            else:
+                data = device.readline().strip()
+                if data is not b'':
+                    for client in clients:
+                        print("["+name+"] [INFO]: --> "+str(data))
+                        client.sendMessage(data)
         except Exception as e:
             websocket_off()
 
